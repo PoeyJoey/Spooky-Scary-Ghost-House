@@ -80,7 +80,7 @@ function catHallwayRoom() {
 // (4,2)
 function catRoom() {
 	// Room to the farthest east. Connected to the cat poster hallway. (catRoom)
-	var message = "You stand in a room filled with cats all along the walls. You can't get through the doors that they block to the north and to the south.";
+	var message = "You stand in a room filled with cats all along the walls. They block the door to the north";
 	canGoNorth = false;
 	canGoSouth = false;
 	canGoWest = true;

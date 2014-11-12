@@ -7,21 +7,21 @@ function goDirection(goDirection){
 
 	goDirection = goDirection.toLowerCase();
 	goDirection = goDirection.trim();
+	
+	var directionMessage = "";
 
 	// Finds what direction the player went and changes their room coordinates accordingly
 	switch(goDirection) {
-		
-
 		
 		// Going North
 		case "north":
 		case "n":
 			if (canGoNorth){
-				northSouth = northSouth - 1;
-				goDirection = "You went north.";
+				northSouth -= 1;
+				directionMessage = "You went north.";
 				roomfind();
 			} else{
-				goDirection = "You can't go that way!";
+				directionMessage = "You can't go that way!";
 			}
 			break;
 			
@@ -29,11 +29,11 @@ function goDirection(goDirection){
 		case "east":
 		case "e":
 			if (canGoEast) {
-				eastWest = eastWest + 1;
-				goDirection = "You went east.";
+				eastWest += 1;
+				directionMessage = "You went east.";
 				roomfind();
 			} else {
-				goDirection = "You can't go that way!";
+				directionMessage = "You can't go that way!";
 			}
 			break;
 			
@@ -41,11 +41,11 @@ function goDirection(goDirection){
 		case "south":
 		case "s":
 			if (canGoSouth) {
-				northSouth = northSouth + 1;
-				goDirection = "You went south.";
+				northSouth += 1;
+				directionMessage = "You went south.";
 				roomfind();
 			} else {
-				goDirection = "You can't go that way!";
+				directionMessage = "You can't go that way!";
 			}
 			break;
 			
@@ -53,11 +53,11 @@ function goDirection(goDirection){
 		case "west":
 		case "w":
 			if (canGoWest) {
-				eastWest = eastWest - 1;
-				goDirection = "You went west.";
+				eastWest -= 1;
+				directionMessage = "You went west.";
 				roomfind();
 			} else {
-				goDirection = "You can't go that way!";
+				directionMessage = "You can't go that way!";
 			}
 			break;
 			
@@ -65,16 +65,16 @@ function goDirection(goDirection){
 		default:
 			// Display this message if the user typed incorrectly
 			if (error === 5) {
-				goDirection = "Bro! Do you even type?";
+				directionMessage = "Bro, do you even type?";
 			} else {
-				goDirection = "That's not a valid direction!";
+				directionMessage = "That's not a valid command!";
 				error += 1;
 			}
 			break;
 	}
 	
 	// Displays the direction the player went. To be moved to updateDisplay() in the future.
-	document.getElementById("taMain").value = goDirection + "\n\n" + document.getElementById("taMain").value;
+	displayDirection(directionMessage);
 	
 	// Disables the directions the player cannot go.
 	btnDisable();
@@ -128,9 +128,14 @@ function roomfind() {
 // Message, Score, and Buttons
 //
 function updateDisplay(message) {
-	//Adds the text from the room to the message box
+	// Adds the text from the room to the message box
 	document.getElementById("taMain").value = message + "\n----------------------------------\n" + document.getElementById("taMain").value;
 	updateScore();
+}
+
+function displayDirection(message) {
+	// Tells the user what direction they went
+	document.getElementById("taMain").value = message + "\n\n" + document.getElementById("taMain").value;
 }
 
 function updateScore() {
