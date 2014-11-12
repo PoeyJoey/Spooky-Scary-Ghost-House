@@ -124,16 +124,12 @@ function roomfind() {
 		case 2:
 			if (northSouth === 1){
 				mattressRoom();
+			} else if (northSouth === 2) {
+				centerRoom();
+			} else if (northSouth === 3) {
+				trainRoom();
 			} else {
-				if (northSouth === 2) {
-					centerRoom();
-				} else {
-					if (northSouth === 3) {
-						trainRoom();
-					} else {
-						error();
-					}
-				}
+				error();
 			}
 			break;
 		case 3:
@@ -156,7 +152,11 @@ function roomfind() {
 	}
 }
 
+//
 // Rooms
+//
+
+// (1,2)
 function mirrorRoom() {
 	// Room to the west of the starting room (mirrorRoom)
 	var message = "You stand in a room with a door to the east. There is a large mirror on the wall in front of you but it's too dirty to see any reflections.";
@@ -171,6 +171,7 @@ function mirrorRoom() {
 	updateDisplay(message);
 }	
 
+// (2,1)
 function mattressRoom() {
 	// Room to the north of the center room (mattressRoom)
 	var message = "You stand in a room with a door to the south. There are mattresses piled up against the walls that block the windows.";
@@ -185,6 +186,7 @@ function mattressRoom() {
 	updateDisplay(message);
 }
 
+// (2,2)
 function centerRoom() {
 	// Center room (centerRoom)
 	var message = "You stand in a room with doors on all sides. There is a large chandelier hanging from the center of the room.";
@@ -199,6 +201,7 @@ function centerRoom() {
 	updateDisplay(message);
 }
 
+// (2,3)
 function trainRoom() {
 	// Room to the south of the center room (trainRoom)
 	var message = "You stand in a room with a door to the north. There is a train set on the ground but no trains can be seen.";
@@ -213,6 +216,7 @@ function trainRoom() {
 	updateDisplay(message);
 }
 
+// (3,2)
 function catHallwayRoom() {
 	// Room to the east of the center room (catHallwayRoom)
 	var message = "You stand in a hallway connecting two rooms to the east and the west. There are motivational cat posters all along the walls.";
@@ -227,6 +231,7 @@ function catHallwayRoom() {
 	updateDisplay(message);
 }
 
+// (4,2)
 function catRoom() {
 	// Room to the farthest east. Connected to the cat poster hallway. (catRoom)
 	var message = "You stand in a room filled with cats all along the walls. You can't get through the doors that they block to the north and to the south.";
