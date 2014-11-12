@@ -26,6 +26,11 @@ var hasVisitedCatRoom = false;
 var score = 0;
 var error = 0;
 
+
+//
+//Game Functions
+//
+
 // Direction Pathing
 function goDirection(goDirection){
 
@@ -39,9 +44,7 @@ function goDirection(goDirection){
 		
 		// Going North
 		case "north":
-		//case "North":
 		case "n":
-		//case "N":
 			if (canGoNorth){
 				northSouth = northSouth - 1;
 				goDirection = "You went north.";
@@ -53,9 +56,7 @@ function goDirection(goDirection){
 			
 		// Going East
 		case "east":
-		case "East":
 		case "e":
-		case "E":
 			if (canGoEast) {
 				eastWest = eastWest + 1;
 				goDirection = "You went east.";
@@ -67,9 +68,7 @@ function goDirection(goDirection){
 			
 		// Going South
 		case "south":
-		case "South":
 		case "s":
-		case "S":
 			if (canGoSouth) {
 				northSouth = northSouth + 1;
 				goDirection = "You went south.";
@@ -81,9 +80,7 @@ function goDirection(goDirection){
 			
 		// Going West
 		case "west":
-		case "West":
 		case "w":
-		case "W":
 			if (canGoWest) {
 				eastWest = eastWest - 1;
 				goDirection = "You went west.";
@@ -279,7 +276,6 @@ function error() {
 function start() {
 	// Initializes the game
 	roomfind();
-	document.getElementById("btnStart").disabled = true;
 	document.getElementById("btnEast").disabled = !canGoEast;
 	document.getElementById("btnNorth").disabled = !canGoNorth;
 	document.getElementById("btnSouth").disabled = !canGoSouth;
