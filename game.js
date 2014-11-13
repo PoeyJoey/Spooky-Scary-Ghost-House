@@ -108,8 +108,26 @@ function roomfind() {
 			}
 			break;
 		case 4:
-			if (northSouth === 2) {
+			if (northSouth === 1) {
+				secretRoom();
+			} else if (northSouth === 2) {
 				catRoom();
+			} else if (northSouth === 3) {
+				toyRoom();
+			} else {
+				error();
+			}
+			break;
+		case 5:
+			if (northSouth === 3) {
+				ghostCatRoom();
+			} else {
+				error();
+			}
+			break;
+		case 6:
+			if (northSouth === 3) {
+				altarRoom();
 			} else {
 				error();
 			}
@@ -121,8 +139,9 @@ function roomfind() {
 }
 
 //
-// 
+// Item Taking
 //
+
 
 
 //
