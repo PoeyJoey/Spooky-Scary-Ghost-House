@@ -80,7 +80,7 @@ function catHallwayRoom() {
 // (4,1)
 function secretRoom() {
 	// This room will be a secret room that's not on the player's map. It will also be the final room. (secretRoom)
-	var message = "You found the exit! Although the game isn't finished yet... You'll have to solve a puzzle to get here in the next version.";
+	var message = "You found the exit! Although the game isn't finished yet... You'll have to solve a puzzle to get here in the next version. (involves items)";
 	canGoNorth = false;
 	canGoSouth = true;
 	canGoWest = false;
@@ -125,7 +125,7 @@ function toyRoom() {
 // (5,3)
 function ghostCatRoom() {
 	// This room will have a massive, sleeping ghost cat that blocks the way. You'll have to find a way to wake it up. (ghostCatRoom)
-	var message = "A giant sleeping ghost cat blocks the way to the next room. You attempt to walk through him, but it's impossible.";
+	var message = "A giant sleeping ghost cat blocks the way to the next room but it seems you can walk right through him.";
 	canGoNorth = false;
 	canGoSouth = false;
 	canGoWest = true;

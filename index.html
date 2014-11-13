@@ -106,14 +106,14 @@
 		<input	type="text" 
 					id = "txtCommand"
 					name="txtCommand"
-					onkeydown = "if (event.keyCode == 13) goDirection(document.getElementById('txtCommand').value);"
+					onkeydown = "if (event.keyCode == 13) commandInput(document.getElementById('txtCommand').value);"
 					style="width: 187px"
 					disabled />
 				
 		<input	type="button"
 					id = "btnGo"
 					value="Go" 
-					onclick="goDirection(document.getElementById('txtCommand').value);"
+					onclick="commandInput(document.getElementById('txtCommand').value);"
 					disabled />
 				
 		<br><br>

@@ -1,9 +1,59 @@
 //
+// Command Input
+//
+function commandInput(command) {
+	command = command.toLowerCase();
+	command = command.trim();
+	
+	switch(command) {
+
+		case "north":
+		case "n":
+		case "east":
+		case "e":
+		case "south":
+		case "s":
+		case "west":
+		case "w":
+			goDirection(command);
+			break;
+			
+		case "bag":
+		case "b":
+			bag();
+			break;
+			
+		case "take":
+		case "t":
+			take();
+			break;
+			
+		case "help":
+		case "h":
+			help();
+			break;
+			
+		// Error Message
+		default:
+			// Display this message if the user typed incorrectly
+			if (error === 5) {
+				directionMessage = "Bro, do you even type?";
+			} else {
+				directionMessage = "That's not a valid command!";
+				error += 1;
+			}
+			break;
+	}
+	
+	document.getElementById("txtCommand").value = "";
+}
+
+
+//
 // Direction Pathing
 //
-function goDirection(goDirection){
-	goDirection = goDirection.toLowerCase();
-	goDirection = goDirection.trim();
+function goDirection(goDirection) {
+
 	
 	var directionMessage = "";
 	
@@ -70,11 +120,6 @@ function goDirection(goDirection){
 	
 	// Displays the direction the player went. To be moved to updateDisplay() in the future.
 	displayDirection(directionMessage);
-	
-	// Disables the directions the player cannot go.
-	btnDisable();
-	
-	document.getElementById("txtCommand").value = "";
 }
 
 //
@@ -136,12 +181,10 @@ function roomfind() {
 			error();
 			break;
 	}
+	
+	// Disables the directions the player cannot go.
+	btnDisable();
 }
-
-//
-// Item Taking
-//
-
 
 
 //
@@ -169,6 +212,76 @@ function btnDisable() {
 	document.getElementById("btnNorth").disabled = !canGoNorth;
 	document.getElementById("btnSouth").disabled = !canGoSouth;
 	document.getElementById("btnWest").disabled = !canGoWest;
+}
+
+
+//
+// Take Command
+//
+function take() {
+	switch (eastWest) {
+		case 1:
+			if (northSouth === 2) {
+				//broken mirror shard
+			} else {
+				error();
+			}
+			break;
+		case 2:
+			if (northSouth === 1) {
+				//nothing to take
+			} else if (northSouth === 2) {
+				//map
+			} else if (northSouth === 3) {
+				//ball of yarn
+			} else {
+				error();
+			}
+			break;
+		case 3:
+			if (northSouth === 2) {
+				//nothing to take
+			} else {
+				error();
+			}
+			break;
+		case 4:
+			if (northSouth === 1) {
+				//nothing to take
+			} else if (northSouth === 2) {
+				//nothing to take
+			} else if (northSouth === 3) {
+				//nothing to take
+			} else {
+				error();
+			}
+			break;
+		case 5:
+			if (northSouth === 3) {
+				//nothing to take
+			} else {
+				error();
+			}
+			break;
+		case 6:
+			if (northSouth === 3) {
+				//picture book
+			} else {
+				error();
+			}
+			break;
+		default:
+			error();
+			break;
+	}
+}
+
+
+//
+// Bag Command
+//
+function bag() {
+	
 }
 
 
@@ -203,6 +316,7 @@ function error() {
 //
 function start() {
 	// Initializes the game
+	initItems();
 	roomfind();
 	document.getElementById("btnEast").disabled = !canGoEast;
 	document.getElementById("btnNorth").disabled = !canGoNorth;
