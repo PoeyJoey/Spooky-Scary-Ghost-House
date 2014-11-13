@@ -1,15 +1,12 @@
 //
-//Game Functions
-//
-
 // Direction Pathing
+//
 function goDirection(goDirection){
-
 	goDirection = goDirection.toLowerCase();
 	goDirection = goDirection.trim();
 	
 	var directionMessage = "";
-
+	
 	// Finds what direction the player went and changes their room coordinates accordingly
 	switch(goDirection) {
 		
@@ -19,7 +16,6 @@ function goDirection(goDirection){
 			if (canGoNorth){
 				northSouth -= 1;
 				directionMessage = "You went north.";
-				roomfind();
 			} else{
 				directionMessage = "You can't go that way!";
 			}
@@ -31,7 +27,6 @@ function goDirection(goDirection){
 			if (canGoEast) {
 				eastWest += 1;
 				directionMessage = "You went east.";
-				roomfind();
 			} else {
 				directionMessage = "You can't go that way!";
 			}
@@ -43,7 +38,6 @@ function goDirection(goDirection){
 			if (canGoSouth) {
 				northSouth += 1;
 				directionMessage = "You went south.";
-				roomfind();
 			} else {
 				directionMessage = "You can't go that way!";
 			}
@@ -55,7 +49,6 @@ function goDirection(goDirection){
 			if (canGoWest) {
 				eastWest -= 1;
 				directionMessage = "You went west.";
-				roomfind();
 			} else {
 				directionMessage = "You can't go that way!";
 			}
@@ -73,6 +66,8 @@ function goDirection(goDirection){
 			break;
 	}
 	
+	roomfind();
+	
 	// Displays the direction the player went. To be moved to updateDisplay() in the future.
 	displayDirection(directionMessage);
 	
@@ -82,18 +77,20 @@ function goDirection(goDirection){
 	document.getElementById("txtCommand").value = "";
 }
 
+//
 // Room Finding
+//
 function roomfind() {
 	switch (eastWest) {
 		case 1:
-			if (northSouth === 2){
+			if (northSouth === 2) {
 				mirrorRoom();
 			} else {
 				error();
 			}
 			break;
 		case 2:
-			if (northSouth === 1){
+			if (northSouth === 1) {
 				mattressRoom();
 			} else if (northSouth === 2) {
 				centerRoom();
@@ -104,14 +101,14 @@ function roomfind() {
 			}
 			break;
 		case 3:
-			if (northSouth === 2){
+			if (northSouth === 2) {
 				catHallwayRoom();
 			} else {
 				error();
 			}
 			break;
 		case 4:
-			if (northSouth === 2){
+			if (northSouth === 2) {
 				catRoom();
 			} else {
 				error();
@@ -122,6 +119,10 @@ function roomfind() {
 			break;
 	}
 }
+
+//
+// 
+//
 
 
 //
@@ -149,6 +150,22 @@ function btnDisable() {
 	document.getElementById("btnNorth").disabled = !canGoNorth;
 	document.getElementById("btnSouth").disabled = !canGoSouth;
 	document.getElementById("btnWest").disabled = !canGoWest;
+}
+
+
+//
+// Help Command
+//
+function help() {
+	var helpMessage = "Valid Commands:"+"\n\n";
+	helpMessage += "'North'	- brings you north (if possible)"+"\n";
+	helpMessage += "'South'	- brings you south (if possible)"+"\n";
+	helpMessage += "'East'	- brings you east (if possible)"+"\n";
+	helpMessage += "'West'	- brings you west (if possible)"+"\n";
+	helpMessage += "'Take'	- take item (if possible)"+"\n";
+	helpMessage += "'Bag'	- tells you what's in your bag"+"\n";
+	helpMessage += "'Help'	- Shows this message";
+	updateDisplay(helpMessage);
 }
 
 

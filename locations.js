@@ -77,16 +77,76 @@ function catHallwayRoom() {
 	updateDisplay(message);
 }
 
+// (4,1)
+function secretRoom() {
+	// This room will be a secret room that's not on the player's map. It will also be the final room. (exitRoom)
+	var message = "You found the exit! Although the game isn't finished yet... You'll have to solve a puzzle to get here in the next version.";
+	canGoNorth = false;
+	canGoSouth = true;
+	canGoWest = false;
+	canGoEast = false;
+	if (!hasVisitedSecretRoom) {
+		hasVisitedSecretRoom = true;
+		score += 5;
+	}
+	updateDisplay(message);
+}
+
 // (4,2)
 function catRoom() {
 	// Room to the farthest east. Connected to the cat poster hallway. (catRoom)
-	var message = "You stand in a room filled with cats all along the walls. They block the door to the north";
+	var message = "You stand in a room filled with cats all along the walls. They appear to be trying to get through the door to the south.";
 	canGoNorth = false;
 	canGoSouth = false;
 	canGoWest = true;
 	canGoEast = false;
 	if (!hasVisitedCatRoom) {
 		hasVisitedCatRoom = true;
+		score += 5;
+	}
+	updateDisplay(message);
+}
+
+// (4,3)
+function toyRoom() {
+	// This room will be a secret room that's not on the player's map. It will also be the final room. (exitRoom)
+	var message = "There are cat toys scattered around the room. You now see why so many cats were trying to get in here.";
+	canGoNorth = true;
+	canGoSouth = false;
+	canGoWest = false;
+	canGoEast = true;
+	if (!hasVisitedToyRoom) {
+		hasVisitedToyRoom = true;
+		score += 5;
+	}
+	updateDisplay(message);
+}
+
+// (5,3)
+function secretRoom() {
+	// This room will be a secret room that's not on the player's map. It will also be the final room. (exitRoom)
+	var message = "You found the exit! Although the game isn't finished yet... You'll have to solve a puzzle to get here in the next version.";
+	canGoNorth = false;
+	canGoSouth = false;
+	canGoWest = true;
+	canGoEast = true;
+	if (!hasVisitedSecretRoom) {
+		hasVisitedSecretRoom = true;
+		score += 5;
+	}
+	updateDisplay(message);
+}
+
+// (6,3)
+function secretRoom() {
+	// This room will be a secret room that's not on the player's map. It will also be the final room. (exitRoom)
+	var message = "You found the exit! Although the game isn't finished yet... You'll have to solve a puzzle to get here in the next version.";
+	canGoNorth = false;
+	canGoSouth = false;
+	canGoWest = true;
+	canGoEast = false;
+	if (!hasVisitedSecretRoom) {
+		hasVisitedSecretRoom = true;
 		score += 5;
 	}
 	updateDisplay(message);

@@ -2,7 +2,6 @@
 // Global Variables
 //
 
-
 // Player's current position using coordinates
 // Starting room is (2,2)
 var northSouth = 2;
@@ -14,13 +13,22 @@ var canGoSouth = true;
 var canGoEast = true;
 var canGoWest = true;
 
+// Check if a player can take or look at their inventory
+var canTake = false;
+var canInventory = false;
+
 // Check if a player has visited a room
 var hasVisitedMirrorRoom = false;
 var hasVisitedMattressRoom = false;
 var hasVisitedCenterRoom = false;
 var hasVisitedTrainRoom = false;
 var hasVisitedCatHallwayRoom = false;
+var hasVisitedSecretRoom = false;
 var hasVisitedCatRoom = false;
+var hasVisitedToyRoom = false;
+var hasVisitedRoom = false;
+var hasVisitedRoom = false;
+
 
 // Player's variables
 var score = 0;
