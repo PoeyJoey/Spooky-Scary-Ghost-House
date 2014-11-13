@@ -27,7 +27,7 @@ var hasVisitedSecretRoom = false;
 var hasVisitedCatRoom = false;
 var hasVisitedToyRoom = false;
 var hasVisitedRoom = false;
-var hasVisitedRoom = false;
+var hasVisitedAltarRoom = false;
 
 
 // Player's variables

@@ -79,7 +79,7 @@ function catHallwayRoom() {
 
 // (4,1)
 function secretRoom() {
-	// This room will be a secret room that's not on the player's map. It will also be the final room. (exitRoom)
+	// This room will be a secret room that's not on the player's map. It will also be the final room. (secretRoom)
 	var message = "You found the exit! Although the game isn't finished yet... You'll have to solve a puzzle to get here in the next version.";
 	canGoNorth = false;
 	canGoSouth = true;
@@ -109,7 +109,7 @@ function catRoom() {
 
 // (4,3)
 function toyRoom() {
-	// This room will be a secret room that's not on the player's map. It will also be the final room. (exitRoom)
+	// Room with lots of cat toys everywhere. Nothing important here. (toyRoom)
 	var message = "There are cat toys scattered around the room. You now see why so many cats were trying to get in here.";
 	canGoNorth = true;
 	canGoSouth = false;
@@ -123,30 +123,30 @@ function toyRoom() {
 }
 
 // (5,3)
-function secretRoom() {
-	// This room will be a secret room that's not on the player's map. It will also be the final room. (exitRoom)
-	var message = "You found the exit! Although the game isn't finished yet... You'll have to solve a puzzle to get here in the next version.";
+function ghostCatRoom() {
+	// This room will have a massive, sleeping ghost cat that blocks the way. You'll have to find a way to wake it up. (ghostCatRoom)
+	var message = "A giant sleeping ghost cat blocks the way to the next room. You attempt to walk through him, but it's impossible.";
 	canGoNorth = false;
 	canGoSouth = false;
 	canGoWest = true;
 	canGoEast = true;
-	if (!hasVisitedSecretRoom) {
-		hasVisitedSecretRoom = true;
+	if (!hasVisitedGhostCatRoom) {
+		hasVisitedGhostCatRoom = true;
 		score += 5;
 	}
 	updateDisplay(message);
 }
 
 // (6,3)
-function secretRoom() {
-	// This room will be a secret room that's not on the player's map. It will also be the final room. (exitRoom)
-	var message = "You found the exit! Although the game isn't finished yet... You'll have to solve a puzzle to get here in the next version.";
+function altarRoom() {
+	// This room will have an altar with a children's picture book about cats. Behind the altar a riddle is inscribed into the wall. (altarRoom)
+	var message = "There is an altar at the back of the room. A children's picture book is on the altar. A riddle is inscribed into the wall behind the altar.";
 	canGoNorth = false;
 	canGoSouth = false;
 	canGoWest = true;
 	canGoEast = false;
-	if (!hasVisitedSecretRoom) {
-		hasVisitedSecretRoom = true;
+	if (!hasVisitedAltarRoom) {
+		hasVisitedAltarRoom = true;
 		score += 5;
 	}
 	updateDisplay(message);
