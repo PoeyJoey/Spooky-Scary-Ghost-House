@@ -7,6 +7,7 @@ function commandInput(command) {
 	
 	switch(command) {
 
+		// Goes to direction finding function
 		case "north":
 		case "n":
 		case "east":
@@ -18,16 +19,19 @@ function commandInput(command) {
 			goDirection(command);
 			break;
 			
+		// Goes to the bag function
 		case "bag":
 		case "b":
 			bag();
 			break;
-			
+		
+		// Goes to the item taking function
 		case "take":
 		case "t":
 			take();
 			break;
-			
+		
+		// Goes to the help function
 		case "help":
 		case "h":
 			help();
@@ -36,11 +40,11 @@ function commandInput(command) {
 		// Error Message
 		default:
 			// Display this message if the user typed incorrectly
-			if (error === 5) {
-				directionMessage = "Bro, do you even type?";
+			if (typeError === 5) {
+				displayDirection("Bro, do you even type?");
 			} else {
-				directionMessage = "That's not a valid command!";
-				error += 1;
+				displayDirection("That's not a valid command!");
+				typeError += 1;
 			}
 			break;
 	}
@@ -54,7 +58,6 @@ function commandInput(command) {
 //
 function goDirection(goDirection) {
 
-	
 	var directionMessage = "";
 	
 	// Finds what direction the player went and changes their room coordinates accordingly
@@ -66,6 +69,7 @@ function goDirection(goDirection) {
 			if (canGoNorth){
 				northSouth -= 1;
 				directionMessage = "You went north.";
+				roomfind();
 			} else{
 				directionMessage = "You can't go that way!";
 			}
@@ -77,6 +81,7 @@ function goDirection(goDirection) {
 			if (canGoEast) {
 				eastWest += 1;
 				directionMessage = "You went east.";
+				roomfind();
 			} else {
 				directionMessage = "You can't go that way!";
 			}
@@ -88,6 +93,7 @@ function goDirection(goDirection) {
 			if (canGoSouth) {
 				northSouth += 1;
 				directionMessage = "You went south.";
+				roomfind();
 			} else {
 				directionMessage = "You can't go that way!";
 			}
@@ -99,26 +105,20 @@ function goDirection(goDirection) {
 			if (canGoWest) {
 				eastWest -= 1;
 				directionMessage = "You went west.";
+				roomfind();
 			} else {
 				directionMessage = "You can't go that way!";
 			}
 			break;
 			
-		// Error Direction Message
+		// Error Direction
 		default:
-			// Display this message if the user typed incorrectly
-			if (error === 5) {
-				directionMessage = "Bro, do you even type?";
-			} else {
-				directionMessage = "That's not a valid command!";
-				error += 1;
-			}
+			// Display this message if something bad happened
+			error();
 			break;
 	}
 	
-	roomfind();
-	
-	// Displays the direction the player went. To be moved to updateDisplay() in the future.
+	// Displays the direction the player went.
 	displayDirection(directionMessage);
 }
 
@@ -188,7 +188,7 @@ function roomfind() {
 
 
 //
-// Message, Score, and Buttons
+// Display, Score, and Buttons
 //
 function updateDisplay(message) {
 	// Adds the text from the room to the message box
@@ -222,7 +222,12 @@ function take() {
 	switch (eastWest) {
 		case 1:
 			if (northSouth === 2) {
-				//broken mirror shard
+				//mirror shard
+				if (!mirrorShard.has) {
+					mirrorShard.take();
+				} else {
+					updateDisplay("Nothing here to take.")
+				}
 			} else {
 				error();
 			}
@@ -230,10 +235,21 @@ function take() {
 		case 2:
 			if (northSouth === 1) {
 				//nothing to take
+				updateDisplay("Nothing here to take.")
 			} else if (northSouth === 2) {
 				//map
+				if (!map.has) {
+					map.take();
+				} else {
+					updateDisplay("Nothing here to take.")
+				}
 			} else if (northSouth === 3) {
 				//ball of yarn
+				if (!ballOfYarn.has) {
+					ballOfYarn.take();
+				} else {
+					updateDisplay("Nothing here to take.")
+				}
 			} else {
 				error();
 			}
@@ -241,6 +257,7 @@ function take() {
 		case 3:
 			if (northSouth === 2) {
 				//nothing to take
+				updateDisplay("Nothing here to take.")
 			} else {
 				error();
 			}
@@ -248,10 +265,13 @@ function take() {
 		case 4:
 			if (northSouth === 1) {
 				//nothing to take
+				updateDisplay("Nothing here to take.")
 			} else if (northSouth === 2) {
 				//nothing to take
+				updateDisplay("Nothing here to take.")
 			} else if (northSouth === 3) {
 				//nothing to take
+				updateDisplay("Nothing here to take.")
 			} else {
 				error();
 			}
@@ -259,6 +279,7 @@ function take() {
 		case 5:
 			if (northSouth === 3) {
 				//nothing to take
+				updateDisplay("Nothing here to take.")
 			} else {
 				error();
 			}
@@ -266,6 +287,11 @@ function take() {
 		case 6:
 			if (northSouth === 3) {
 				//picture book
+				if (!pictureBook.has) {
+					pictureBook.take();
+				} else {
+					updateDisplay("Nothing here to take.")
+				}
 			} else {
 				error();
 			}
@@ -281,7 +307,29 @@ function take() {
 // Bag Command
 //
 function bag() {
+	var message = "Your bag contains:" + "\n\n";
 	
+	if (mirrorShard.has === true || ballOfYarn.has === true || map.has === true || pictureBook.has === true){
+		if (mirrorShard.has === true){
+			message = message + mirrorShard.name + "\n";
+		}
+		
+		if (ballOfYarn.has === true){
+			message = message + ballOfYarn.name + "\n";
+		}
+		
+		if (map.has === true){
+			message = message + map.name + "\n";
+		}
+		
+		if (pictureBook.has === true){
+			message = message + pictureBook.name + "\n";
+		}
+	} else {
+		message = message + "Nothing";
+	}
+	
+	updateDisplay(message);
 }
 
 
@@ -296,7 +344,8 @@ function help() {
 	helpMessage += "'West'	- brings you west (if possible)"+"\n";
 	helpMessage += "'Take'	- take item (if possible)"+"\n";
 	helpMessage += "'Bag'	- tells you what's in your bag"+"\n";
-	helpMessage += "'Help'	- Shows this message";
+	helpMessage += "'Help'	- Shows this message" + "\n\n";
+	helpMessage += "Your goal is to escape this Spooky Scary Ghost House that most people consider #2spooky."
 	updateDisplay(helpMessage);
 }
 
@@ -305,6 +354,9 @@ function help() {
 // Error Finding
 //
 function error() {
+
+	// TODO - add something to show where the error came from (error number)
+
 	// Display this message if the game is broken somehow
 	var message = "The cats are here for you. You broke it!";
 	updateDisplay(message);

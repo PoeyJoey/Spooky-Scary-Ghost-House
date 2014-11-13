@@ -31,4 +31,10 @@ var hasVisitedAltarRoom = false;
 
 // Player's variables
 var score = 0;
-var error = 0;
+var typeError = 0;
+
+// Items
+var mirrorShard = null;
+var ballOfYarn = null;
+var map = null;
+var pictureBook = null;

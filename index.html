@@ -17,7 +17,8 @@
 		</style>
 		<script type="text/javascript" src="global.js"		></script>
 		<script type="text/javascript" src="locations.js"	></script>
-		<script type="text/javascript" src="game.js"		></script>
+		<script type="text/javascript" src="game.js"			></script>
+		<script type="text/javascript" src="items.js"			></script>
 	</head>
 	<body onload="start();">
 	
@@ -25,7 +26,7 @@
 			Spooky Scary Ghost House
 		</h2>
 		
-		<textarea rows="10" cols="43" id="taMain" disabled></textarea>
+		<textarea rows="15" cols="43" id="taMain" disabled></textarea>
 		
 		<br>
 		
@@ -77,8 +78,7 @@
 						value="Take"
 						onclick="take();"
 						id="btnTake"
-						class="button"
-						disabled />
+						class="button" />
 					
 					<br>
 					
@@ -87,8 +87,7 @@
 						value="Bag"
 						onclick="bag();"
 						id="btnBag"
-						class="button"
-						disabled />
+						class="button" />
 					
 					<br>
 					
