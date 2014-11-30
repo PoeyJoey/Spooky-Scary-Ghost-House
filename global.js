@@ -38,9 +38,8 @@ var hasVisitedAltarRoom = false;
 var score = 0;
 var typeError = 0;
 
-// Locales
-var mirrorRoom = null;
-
+// Locale Array
+var locale = [];
 
 // Items
 var mirrorShard = null;

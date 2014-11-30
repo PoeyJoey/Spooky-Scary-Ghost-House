@@ -35,23 +35,109 @@ function Locale() {
 }
 
 function initLocale() {
-	mirrorRoom = new Locale();
-	mirrorRoom.id = "Mirror Room";
-	mirrorRoom.name = "Mirror Room";
-	mirrorRoom.desc = "You stand in a room with a door to the east. There is a large mirror on the wall in front of you but it's too dirty to see any reflections.";
-	mirrorRoom.hasItem = true;
-	mirrorRoom.item = mirrorShard;
-	mirrorRoom.canGoNorth = false;
-	mirrorRoom.canGoEast = true;
-	mirrorRoom.canGoSouth = false;
-	mirrorRoom.canGoWest = false;
+	var mirrorRoom = new Locale();
+	mirrorRoom.id						= "mirrorRoom";
+	mirrorRoom.name				= "Mirror Room";
+	mirrorRoom.desc					= "You stand in a room with a door to the east. There is a large mirror on the wall in front of you but it's too dirty to see any reflections.";
+	mirrorRoom.hasItem			= true;
+	mirrorRoom.item					= mirrorShard;
+	mirrorRoom.canGoNorth		= false;
+	mirrorRoom.canGoEast		= true;
+	mirrorRoom.canGoSouth		= false;
+	mirrorRoom.canGoWest		= false;
 	
+	var mattressRoom = new Locale();
+	mattressRoom.id					= "mattressRoom";
+	mattressRoom.name			= "Mattress Room";
+	mattressRoom.desc				= "You stand in a room with a door to the south. There are mattresses piled up against the walls that block the windows.";
+	mattressRoom.canGoNorth	= false;
+	mattressRoom.canGoEast	= false;
+	mattressRoom.canGoSouth	= true;
+	mattressRoom.canGoWest	= false;
 	
-	ballOfYarn = new Item();
-	ballOfYarn.name = "Ball of Yarn";
+	var centerRoom = new Locale();
+	centerRoom.id						= "centerRoom";
+	centerRoom.name					= "Center Room";
+	centerRoom.desc					= "";
+	centerRoom.hasItem				= true;
+	centerRoom.item					= map;
+	centerRoom.canGoNorth		= true;
+	centerRoom.canGoEast			= true;
+	centerRoom.canGoSouth		= true;
+	centerRoom.canGoWest		= true;
 	
-	map = new Item();
-	map.name = "Map";
+	var trainRoom = new Locale();
+	trainRoom.id							= "trainRoom";
+	trainRoom.name					= "Train Room";
+	trainRoom.desc						= "";
+	trainRoom.hasItem				= true;
+	trainRoom.item						= ballOfYarn;
+	trainRoom.canGoNorth			= true;
+	trainRoom.canGoEast			= false;
+	trainRoom.canGoSouth			= false;
+	trainRoom.canGoWest			= false;
+	
+	var catHallwayRoom = new Locale();
+	catHallwayRoom.id					= "catHallwayRoom";
+	catHallwayRoom.name				= "Cat Hallway Room";
+	catHallwayRoom.desc				= "";
+	catHallwayRoom.hasItem			= true;
+	catHallwayRoom.item				= motivationalCatPoster;
+	catHallwayRoom.canGoNorth	= false;
+	catHallwayRoom.canGoEast		= true;
+	catHallwayRoom.canGoSouth	= false;
+	catHallwayRoom.canGoWest	= true;
+	
+	var secretRoom = new Locale();
+	secretRoom.id						= "secretRoom";
+	secretRoom.name					= "Secret Room";
+	secretRoom.desc					= "";
+	// This is the final room. There is no reason for the player to go any direction.
+	secretRoom.canGoNorth		= false;
+	secretRoom.canGoEast			= false;
+	secretRoom.canGoSouth		= false;
+	secretRoom.canGoWest		= false;
+	
+	var catRoom = new Locale();
+	catRoom.id								= "catRoom";
+	catRoom.name						= "Cat Room";
+	catRoom.desc						= "";
+	// canGoNorth will be unlocked when the player picks up the picture book.
+	catRoom.canGoNorth			= false;
+	catRoom.canGoEast				= false;
+	// canGoSouth will be unlocked when the player picks up the ball of yarn.
+	catRoom.canGoSouth			= false;
+	catRoom.canGoWest				= true;
+	
+	var toyRoom = new Locale();
+	toyRoom.id								= "toyRoom";
+	toyRoom.name						= "Toy Room";
+	toyRoom.desc							= "";
+	toyRoom.canGoNorth			= true;
+	toyRoom.canGoEast				= true;
+	toyRoom.canGoSouth			= false;
+	toyRoom.canGoWest				= false;
+	
+	var ghostCatRoom = new Locale();
+	ghostCatRoom.id					= "catRoom";
+	ghostCatRoom.name				= "Cat Room";
+	ghostCatRoom.desc				= "";
+	ghostCatRoom.canGoNorth	= false;
+	// canGoEast will be unlocked when player picks up the motivational cat poster.
+	ghostCatRoom.canGoEast		= false;
+	ghostCatRoom.canGoSouth	= false;
+	ghostCatRoom.canGoWest	= true;
+	
+	var altarRoom = new Locale();
+	altarRoom.id							= "altarRoom";
+	altarRoom.name					= "Altar Room";
+	altarRoom.desc						= "";
+	altarRoom.hasItem				= true;
+	altarRoom.item						= pictureBook;
+	altarRoom.canGoNorth			= false;
+	altarRoom.canGoEast			= false;
+	altarRoom.canGoSouth			= false;
+	altarRoom.canGoWest			= true;
 }
 
 
