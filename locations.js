@@ -184,46 +184,33 @@ function initLocale() {
 	// Rooms stored in locale array using their coordinates (first digit is east-west and the second digit is north-south)
 	//
 	
-	// Unused 0 East-West
-	locale[0][0] = errorRoom;
-	locale[0][1] = errorRoom;
-	locale[0][2] = errorRoom;
-	locale[0][3] = errorRoom;
+	// makes all locale array values in the 8 by 5 grid "errorRoom" (locale[0 through 7][0 through 4] = errorRoom)
+	for (var x = 0; x < 8; x++) {
+		for (var y = 0; y < 5; y++) {
+			locale[x][y] = errorRoom;
+		}
+	}
 	
-	// 1 East-West
-	locale[1][0] = errorRoom;
-	locale[1][1] = errorRoom;
+	// Replaces all the false "errorRoom" locations with the correct rooms
+	
 	locale[1][2] = mirrorRoom;
-	locale[1][3] = errorRoom;
 	
-	// 2 East-West
-	locale[2][0] = errorRoom;
 	locale[2][1] = mattressRoom;
+	
 	locale[2][2] = centerRoom;
+	
 	locale[2][3] = trainRoom;
 	
-	// 3 East-West
-	locale[3][0] = errorRoom;
-	locale[3][1] = errorRoom;
 	locale[3][2] = catHallwayRoom;
-	locale[3][3] = errorRoom;
 	
-	// 4 East-West
-	locale[4][0] = errorRoom;
 	locale[4][1] = secretRoom;
+	
 	locale[4][2] = catRoom;
+	
 	locale[4][3] = toyRoom;
 	
-	// 5 East-West
-	locale[5][0] = errorRoom;
-	locale[5][1] = errorRoom;
-	locale[5][2] = errorRoom;
 	locale[5][3] = ghostCatRoom;
 	
-	// 6 East-West
-	locale[6][0] = errorRoom;
-	locale[6][1] = errorRoom;
-	locale[6][2] = errorRoom;
 	locale[6][3] = altarRoom;
 }
 
@@ -416,7 +403,7 @@ function altarRoom() {
 	// This room will have an altar with a children's picture book about cats. Behind the altar a riddle is inscribed into the wall. (altarRoom)
 	var message = "There is an altar towards the back of the room.  A riddle is inscribed into the wall behind the altar. It reads 'TODO - create an actual riddle.' How strange...";
 	
-	if (!ballOfYarn.has) {
+	if (!pictureBook.has) {
 		message = message + "\n\n" + "A children's picture book is lying open on the altar.";
 	}
 	
