@@ -29,14 +29,18 @@ function initItems() {
 	mirrorShard.name = "Broken Mirror Shard";
 	
 	ballOfYarn = new Item();
+	ballOfYarn.find = "A ball of yarn is stuffed into one of the train set's tunnels.";
 	ballOfYarn.name = "Ball of Yarn";
 	
 	map = new Item();
+	map.find = "A map rests on a nearby table.";
 	map.name = "Map";
 	
 	pictureBook = new Item();
+	pictureBook.find = "A children's picture book is lying open on the altar.";
 	pictureBook.name = "Picture Book";
 	
 	motivationalCatPoster = new Item();
+	motivationalCatPoster.find = "Maybe one of these posters will move that ghost cat...";
 	motivationalCatPoster.name = "Motivational Cat Poster";
 }
