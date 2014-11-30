@@ -7,12 +7,11 @@
 // Base Class - Locale
 //
 function Locale() {
-	this.id = "";
 	this.name = "";
 	this.desc = "";
 	
 	this.hasItem = false;
-	this.item = noItem;
+	this.item = null;
 	
 	this.hasVisited = false;
 	
@@ -22,18 +21,30 @@ function Locale() {
 	this.canGoWest = null;
 	
 	this.visit =	function() {
-							if (!this.hasVisited) {
-								this.hasVisited = true;
-								score += 5;
-							}
+							// adds score if the player has not visited the room before
+							this.scoreRoom();
 							
 							// changes the canGo global variables based on the room
-							this.canGo;
+							this.canGo();
 							
 							// updates the message based on the room
-							this.message;
+							this.message();
 						}
-						
+	
+	this.scoreRoom =	function() {
+										if (!this.hasVisited) {
+											this.hasVisited = true;
+											score += 5;
+										}
+									}
+	
+	this.canGo =	function() {
+								canGoNorth = this.canGoNorth;
+								canGoEast = this.canGoEast;
+								canGoSouth = this.canGoSouth;
+								canGoWest = this.canGoWest;
+							}
+	
 	this.message =	function() {
 									var message = this.desc;
 									
@@ -43,13 +54,6 @@ function Locale() {
 									
 									updateDisplay(message);
 								}
-								
-	this.canGo =	function() {
-								canGoNorth = this.canGoNorth;
-								canGoEast = this.canGoEast;
-								canGoSouth = this.canGoSouth;
-								canGoWest = this.canGoWest;
-							}
 }
 
 //
@@ -58,11 +62,12 @@ function Locale() {
 function initLocale() {
 	// (1,2)
 	var mirrorRoom = new Locale();
-	mirrorRoom.id = "mirrorRoom";
 	mirrorRoom.name = "Mirror Room";
 	mirrorRoom.desc = "You stand in a room with a door to the east. There is a large mirror on the wall in front of you but it's too dirty to see any reflections.";
-	mirrorRoom.hasItem = true;
-	mirrorRoom.item = mirrorShard;
+	// hasItem will be changed to true after attempting to take the motivational cat poster
+	mirrorRoom.hasItem = false;
+	// item is the mirror shard (item [0])
+	mirrorRoom.item = item[0];
 	mirrorRoom.canGoNorth = false;
 	mirrorRoom.canGoEast = true;
 	mirrorRoom.canGoSouth = false;
@@ -70,7 +75,6 @@ function initLocale() {
 	
 	// (2,1)
 	var mattressRoom = new Locale();
-	mattressRoom.id = "mattressRoom";
 	mattressRoom.name = "Mattress Room";
 	mattressRoom.desc = "You stand in a room with a door to the south. There are mattresses piled up against the walls that block the windows.";
 	mattressRoom.canGoNorth = false;
@@ -80,11 +84,11 @@ function initLocale() {
 	
 	// (2,2)
 	var centerRoom = new Locale();
-	centerRoom.id = "centerRoom";
 	centerRoom.name = "Center Room";
 	centerRoom.desc = "You stand in a room with doors on all sides. There is a large chandelier hanging from the center of the room.";
 	centerRoom.hasItem = true;
-	centerRoom.item = map;
+	// item is the map (item [2])
+	centerRoom.item = item[2];
 	centerRoom.canGoNorth = true;
 	centerRoom.canGoEast = true;
 	centerRoom.canGoSouth = true;
@@ -92,11 +96,11 @@ function initLocale() {
 	
 	// (2,3)
 	var trainRoom = new Locale();
-	trainRoom.id = "trainRoom";
 	trainRoom.name = "Train Room";
 	trainRoom.desc = "You stand in a room with a door to the north. There is a train set on the ground but no trains can be seen.";
 	trainRoom.hasItem = true;
-	trainRoom.item = ballOfYarn;
+	// item is the ball of yarn (item [1])
+	trainRoom.item = item[1];
 	trainRoom.canGoNorth = true;
 	trainRoom.canGoEast = false;
 	trainRoom.canGoSouth = false;
@@ -104,14 +108,12 @@ function initLocale() {
 	
 	// (3,2)
 	var catHallwayRoom = new Locale();
-	catHallwayRoom.id = "catHallwayRoom";
 	catHallwayRoom.name = "Cat Hallway Room";
 	catHallwayRoom.desc = "You stand in a hallway connecting two rooms to the east and the west. There are motivational cat posters all along the walls.";
-	// hasItem will be changed to true after finding the ghost cat in the ghost cat room and will have the item "motivationalCatPoster"
-	
-	//catHallwayRoom.hasItem = true;
-	//catHallwayRoom.item = motivationalCatPoster;
-	
+	// hasItem will be changed to true after finding the ghost cat in the ghost cat room
+	catHallwayRoom.hasItem = false;
+	// item is the motivational cat poster (item[4])
+	catHallwayRoom.item = item[4];
 	catHallwayRoom.canGoNorth = false;
 	catHallwayRoom.canGoEast = true;
 	catHallwayRoom.canGoSouth = false;
@@ -119,7 +121,6 @@ function initLocale() {
 	
 	// (4,1)
 	var secretRoom = new Locale();
-	secretRoom.id = "secretRoom";
 	secretRoom.name = "Secret Room";
 	secretRoom.desc = "You found the exit! Although the game isn't finished yet... You'll have to solve a puzzle to get here in the next version. (involves items)";
 	// This is the final room. There is no reason for the player to go any direction.
@@ -130,7 +131,6 @@ function initLocale() {
 	
 	// (4,2)
 	var catRoom = new Locale();
-	catRoom.id = "catRoom";
 	catRoom.name = "Cat Room";
 	catRoom.desc = "You stand in a room filled with cats crawling all over the walls. They're blocking the door to the south.";
 	// canGoNorth will be unlocked when the player picks up the picture book.
@@ -142,7 +142,6 @@ function initLocale() {
 	
 	// (4,3)
 	var toyRoom = new Locale();
-	toyRoom.id = "toyRoom";
 	toyRoom.name = "Toy Room";
 	toyRoom.desc = "There are cat toys scattered around the room. You now see why so many cats were trying to get in here.";
 	toyRoom.canGoNorth = true;
@@ -152,7 +151,6 @@ function initLocale() {
 	
 	// (5,3)
 	var ghostCatRoom = new Locale();
-	ghostCatRoom.id = "ghostCatRoom";
 	ghostCatRoom.name = "Ghost Cat Room";
 	ghostCatRoom.desc = "A giant sleeping ghost cat blocks the way to the next room but it seems you can walk right through him.";
 	ghostCatRoom.canGoNorth = false;
@@ -163,20 +161,19 @@ function initLocale() {
 	
 	// (6,3)
 	var altarRoom = new Locale();
-	altarRoom.id = "altarRoom";
 	altarRoom.name = "Altar Room";
 	altarRoom.desc = "There is an altar towards the back of the room.  A riddle is inscribed into the wall behind the altar. It reads 'TODO - create an actual riddle.' How strange...";
 	altarRoom.hasItem = true;
-	altarRoom.item = pictureBook;
+	// item is the picture book (item[3])
+	altarRoom.item = item[3];
 	altarRoom.canGoNorth = false;
 	altarRoom.canGoEast = false;
 	altarRoom.canGoSouth = false;
 	altarRoom.canGoWest = true;
 	
 	var errorRoom = new Locale();
-	errorRoom.id = "errorRoom";
 	errorRoom.name = "Error Room";
-	errorRoom.desc = "This room is a direction error. Please email me where you where when this error occurred.";
+	errorRoom.desc = "This room is an error room. Please email me where you were and what you did when this error occurred.";
 	errorRoom.canGoNorth = false;
 	errorRoom.canGoEast = false;
 	errorRoom.canGoSouth = false;
@@ -232,7 +229,7 @@ function initLocale() {
 
 
 
-// --------------------OLD STUFF--------------------
+/* --------------------OLD STUFF--------------------
 
 
 
@@ -435,3 +432,4 @@ function altarRoom() {
 	
 	updateDisplay(message);
 }
+*/

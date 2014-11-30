@@ -131,61 +131,10 @@ function goDirection(goDirection) {
 // Room Finding
 //
 function roomFind() {
-	switch (eastWest) {
-		case 1:
-			if (northSouth === 2) {
-				mirrorRoom();
-			} else {
-				error();
-			}
-			break;
-		case 2:
-			if (northSouth === 1) {
-				mattressRoom();
-			} else if (northSouth === 2) {
-				centerRoom();
-			} else if (northSouth === 3) {
-				trainRoom();
-			} else {
-				error();
-			}
-			break;
-		case 3:
-			if (northSouth === 2) {
-				catHallwayRoom();
-			} else {
-				error();
-			}
-			break;
-		case 4:
-			if (northSouth === 1) {
-				secretRoom();
-			} else if (northSouth === 2) {
-				catRoom();
-			} else if (northSouth === 3) {
-				toyRoom();
-			} else {
-				error();
-			}
-			break;
-		case 5:
-			if (northSouth === 3) {
-				ghostCatRoom();
-			} else {
-				error();
-			}
-			break;
-		case 6:
-			if (northSouth === 3) {
-				altarRoom();
-			} else {
-				error();
-			}
-			break;
-		default:
-			error();
-			break;
-	}
+
+	currentLoc = locale[eastWest][northSouth];
+	
+	currentLoc.visit();
 	
 	// Disables the directions the player cannot go.
 	btnDisable();
@@ -224,6 +173,11 @@ function btnDisable() {
 // Take Command
 //
 function take() {
+
+//	if (currentLoc.hasItem) {
+//		currentLoc.item.take();
+//	}
+
 	switch (eastWest) {
 		case 1:
 			if (northSouth === 2) {
@@ -384,6 +338,7 @@ function error() {
 function start() {
 	// Initializes the game
 	initItems();
+	initLocale();
 	roomFind();
 	document.getElementById("btnEast").disabled = !canGoEast;
 	document.getElementById("btnNorth").disabled = !canGoNorth;
