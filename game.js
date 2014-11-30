@@ -136,7 +136,7 @@ function roomFind() {
 	
 	currentLoc.visit();
 	
-	// Disables the directions the player cannot go.
+	// Enables/Disables the buttons for the directions the player can/cannot go.
 	btnDisable();
 }
 
@@ -146,7 +146,7 @@ function roomFind() {
 //
 function updateDisplay(message) {
 	// Adds the text from the room to the message box
-	document.getElementById("taMain").value = message + "\n----------------------------------\n" + document.getElementById("taMain").value;
+	document.getElementById("taMain").value = message + "\n\n----------------------------------\n" + document.getElementById("taMain").value;
 	updateScore();
 }
 
@@ -162,10 +162,10 @@ function displayDirection(message) {
 
 function btnDisable() {
 	// Disables the buttons
-	document.getElementById("btnEast").disabled = !canGoEast;
-	document.getElementById("btnNorth").disabled = !canGoNorth;
-	document.getElementById("btnSouth").disabled = !canGoSouth;
-	document.getElementById("btnWest").disabled = !canGoWest;
+	document.getElementById("btnEast").disabled = !currentLoc.canGoEast;
+	document.getElementById("btnNorth").disabled = !currentLoc.canGoNorth;
+	document.getElementById("btnSouth").disabled = !currentLoc.canGoSouth;
+	document.getElementById("btnWest").disabled = !currentLoc.canGoWest;
 }
 
 
@@ -174,90 +174,27 @@ function btnDisable() {
 //
 function take() {
 
-//	if (currentLoc.hasItem) {
-//		currentLoc.item.take();
-//	}
-
-	switch (eastWest) {
-		case 1:
-			if (northSouth === 2) {
-				//mirror shard
-				if (!mirrorShard.has) {
-					mirrorShard.take();
-				} else {
-					updateDisplay("Nothing here to take.")
-				}
-			} else {
-				error();
-			}
-			break;
-		case 2:
-			if (northSouth === 1) {
-				//nothing to take
-				updateDisplay("Nothing here to take.")
-			} else if (northSouth === 2) {
-				//map
-				if (!map.has) {
-					map.take();
-				} else {
-					updateDisplay("Nothing here to take.")
-				}
-			} else if (northSouth === 3) {
-				//ball of yarn
-				if (!ballOfYarn.has) {
-					ballOfYarn.take();
-				} else {
-					updateDisplay("Nothing here to take.")
-				}
-			} else {
-				error();
-			}
-			break;
-		case 3:
-			if (northSouth === 2) {
-				//nothing to take
-				updateDisplay("Nothing here to take.")
-			} else {
-				error();
-			}
-			break;
-		case 4:
-			if (northSouth === 1) {
-				//nothing to take
-				updateDisplay("Nothing here to take.")
-			} else if (northSouth === 2) {
-				//nothing to take
-				updateDisplay("Nothing here to take.")
-			} else if (northSouth === 3) {
-				//nothing to take
-				updateDisplay("Nothing here to take.")
-			} else {
-				error();
-			}
-			break;
-		case 5:
-			if (northSouth === 3) {
-				//nothing to take
-				updateDisplay("Nothing here to take.")
-			} else {
-				error();
-			}
-			break;
-		case 6:
-			if (northSouth === 3) {
-				//picture book
-				if (!pictureBook.has) {
-					pictureBook.take();
-				} else {
-					updateDisplay("Nothing here to take.")
-				}
-			} else {
-				error();
-			}
-			break;
-		default:
-			error();
-			break;
+	if (currentLoc.seeItem) {
+		currentLoc.item.take();
+	} else {
+		updateDisplay("You don't see anything that you need here.")
+	}
+	
+	// Special Occurrences that happen when an Item is taken
+	
+	// if player picks up the map, show the map below
+	if (item[2].has && document.getElementById("map").style.visibility === "hidden") {
+		document.getElementById("map").style.visibility = "visible";
+	}
+	
+	// if player tried to take the cat poster and they cannot see the mirror shard, let them see/take the mirror shard
+	if (item[4].failedTake && !locale[1][2].seeItem) {
+		locale[1][2].seeItem = true;
+	}
+	
+	// if player has the mirror shard and cannot take the cat poster, allow them to take the cat poster
+	if (item[0].has && !item[4].canTake) {
+		item[4].canTake = true;
 	}
 }
 
@@ -266,37 +203,15 @@ function take() {
 // Bag Command
 //
 function bag() {
-	var message = "Your bag contains:" + "\n\n";
+	var message = "Your bag contains:" + "\n";
 	
 	if (inventory.length > 0) {
 		for (var i = 0; i < inventory.length; i++) {
-			message = message + inventory[i] + "\n";
+			message = message + "\n" + inventory[i];
 		}
 	} else {
 		message = message + "Nothing";
 	}
-	
-	/*
-	if (mirrorShard.has === true || ballOfYarn.has === true || map.has === true || pictureBook.has === true){
-		if (mirrorShard.has === true){
-			message = message + mirrorShard.name + "\n";
-		}
-		
-		if (ballOfYarn.has === true){
-			message = message + ballOfYarn.name + "\n";
-		}
-		
-		if (map.has === true){
-			message = message + map.name + "\n";
-		}
-		
-		if (pictureBook.has === true){
-			message = message + pictureBook.name + "\n";
-		}
-	} else {
-		message = message + "Nothing";
-	}
-	*/
 	
 	updateDisplay(message);
 }
@@ -340,10 +255,6 @@ function start() {
 	initItems();
 	initLocale();
 	roomFind();
-	document.getElementById("btnEast").disabled = !canGoEast;
-	document.getElementById("btnNorth").disabled = !canGoNorth;
-	document.getElementById("btnSouth").disabled = !canGoSouth;
-	document.getElementById("btnWest").disabled = !canGoWest;
 	document.getElementById("txtCommand").disabled = false;
 	document.getElementById("btnGo").disabled = false;
 }
