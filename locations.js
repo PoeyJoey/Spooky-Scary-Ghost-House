@@ -4,6 +4,63 @@
 
 
 //
+// Base Class - Location
+//
+function Locale() {
+	this.id = null;
+	this.name = "";
+	this.desc = "";
+	
+	this.hasItem = false;
+	this.item = null;
+	
+	this.hasVisited = false;
+	
+	this.canGoNorth = null;
+	this.canGoEast = null;
+	this.canGoSouth = null;
+	this.canGoWest = null;
+	
+	this.visit = 	function() {
+							if (!this.hasVisited) {
+								this.hasVisited = true;
+								score += 5;
+							}
+							var message = this.desc;
+							if (this.hasItem){
+								message = message + "\n\n" + this.item.find;
+							}
+							updateDisplay(message);
+						}
+}
+
+function initLocale() {
+	mirrorRoom = new Locale();
+	mirrorRoom.id = "Mirror Room";
+	mirrorRoom.name = "Mirror Room";
+	mirrorRoom.desc = "You stand in a room with a door to the east. There is a large mirror on the wall in front of you but it's too dirty to see any reflections.";
+	mirrorRoom.hasItem = true;
+	mirrorRoom.item = mirrorShard;
+	mirrorRoom.canGoNorth = false;
+	mirrorRoom.canGoEast = true;
+	mirrorRoom.canGoSouth = false;
+	mirrorRoom.canGoWest = false;
+	
+	
+	ballOfYarn = new Item();
+	ballOfYarn.name = "Ball of Yarn";
+	
+	map = new Item();
+	map.name = "Map";
+}
+
+
+
+// --------------------OLD STUFF--------------------
+
+
+
+//
 // Rooms
 //
 
