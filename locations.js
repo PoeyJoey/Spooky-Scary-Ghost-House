@@ -12,7 +12,7 @@ function Locale() {
 	this.desc = "";
 	
 	this.hasItem = false;
-	this.item = null;
+	this.item = noItem;
 	
 	this.hasVisited = false;
 	
@@ -21,25 +21,35 @@ function Locale() {
 	this.canGoSouth = null;
 	this.canGoWest = null;
 	
-	this.visit = 	function() {
+	this.visit =	function() {
 							if (!this.hasVisited) {
 								this.hasVisited = true;
 								score += 5;
 							}
 							
-							var message = this.desc;
+							// changes the canGo global variables based on the room
+							this.canGo;
 							
-							if (this.hasItem){
-								message = message + "\n\n" + this.item.see;
-							}
-							
-							canGoNorth = this.canGoNorth;
-							canGoEast = this.canGoEast;
-							canGoSouth = this.canGoSouth;
-							canGoWest = this.canGoWest;
-							
-							updateDisplay(message);
+							// updates the message based on the room
+							this.message;
 						}
+						
+	this.message =	function() {
+									var message = this.desc;
+									
+									if (this.hasItem){
+										message = message + "\n\n" + this.item.see;
+									}
+									
+									updateDisplay(message);
+								}
+								
+	this.canGo =	function() {
+								canGoNorth = this.canGoNorth;
+								canGoEast = this.canGoEast;
+								canGoSouth = this.canGoSouth;
+								canGoWest = this.canGoWest;
+							}
 }
 
 //
@@ -97,9 +107,11 @@ function initLocale() {
 	catHallwayRoom.id = "catHallwayRoom";
 	catHallwayRoom.name = "Cat Hallway Room";
 	catHallwayRoom.desc = "You stand in a hallway connecting two rooms to the east and the west. There are motivational cat posters all along the walls.";
-	// hasItem will be changed to true after finding the ghost cat in the ghost cat room
-	catHallwayRoom.hasItem = false;
-	catHallwayRoom.item = motivationalCatPoster;
+	// hasItem will be changed to true after finding the ghost cat in the ghost cat room and will have the item "motivationalCatPoster"
+	
+	//catHallwayRoom.hasItem = true;
+	//catHallwayRoom.item = motivationalCatPoster;
+	
 	catHallwayRoom.canGoNorth = false;
 	catHallwayRoom.canGoEast = true;
 	catHallwayRoom.canGoSouth = false;
@@ -161,14 +173,14 @@ function initLocale() {
 	altarRoom.canGoSouth = false;
 	altarRoom.canGoWest = true;
 	
-	var error = new Locale();
-	error.id = "error";
-	error.name = "Error Room";
-	error.desc = "This room is an error. Something went wrong! Please email me where you where when this error occurred.";
-	error.canGoNorth = false;
-	error.canGoEast = false;
-	error.canGoSouth = false;
-	error.canGoWest = false;
+	var errorRoom = new Locale();
+	errorRoom.id = "errorRoom";
+	errorRoom.name = "Error Room";
+	errorRoom.desc = "This room is a direction error. Please email me where you where when this error occurred.";
+	errorRoom.canGoNorth = false;
+	errorRoom.canGoEast = false;
+	errorRoom.canGoSouth = false;
+	errorRoom.canGoWest = false;
 	
 	
 	//
@@ -176,45 +188,45 @@ function initLocale() {
 	//
 	
 	// Unused 0 East-West
-	locale[0][0] = error;
-	locale[0][1] = error;
-	locale[0][2] = error;
-	locale[0][3] = error;
+	locale[0][0] = errorRoom;
+	locale[0][1] = errorRoom;
+	locale[0][2] = errorRoom;
+	locale[0][3] = errorRoom;
 	
 	// 1 East-West
-	locale[1][0] = error;
-	locale[1][1] = error;
+	locale[1][0] = errorRoom;
+	locale[1][1] = errorRoom;
 	locale[1][2] = mirrorRoom;
-	locale[1][3] = error;
+	locale[1][3] = errorRoom;
 	
 	// 2 East-West
-	locale[2][0] = error;
+	locale[2][0] = errorRoom;
 	locale[2][1] = mattressRoom;
 	locale[2][2] = centerRoom;
 	locale[2][3] = trainRoom;
 	
 	// 3 East-West
-	locale[3][0] = error;
-	locale[3][1] = error;
+	locale[3][0] = errorRoom;
+	locale[3][1] = errorRoom;
 	locale[3][2] = catHallwayRoom;
-	locale[3][3] = error;
+	locale[3][3] = errorRoom;
 	
 	// 4 East-West
-	locale[4][0] = error;
+	locale[4][0] = errorRoom;
 	locale[4][1] = secretRoom;
 	locale[4][2] = catRoom;
 	locale[4][3] = toyRoom;
 	
 	// 5 East-West
-	locale[5][0] = error;
-	locale[5][1] = error;
-	locale[5][2] = error;
+	locale[5][0] = errorRoom;
+	locale[5][1] = errorRoom;
+	locale[5][2] = errorRoom;
 	locale[5][3] = ghostCatRoom;
 	
 	// 6 East-West
-	locale[6][0] = error;
-	locale[6][1] = error;
-	locale[6][2] = error;
+	locale[6][0] = errorRoom;
+	locale[6][1] = errorRoom;
+	locale[6][2] = errorRoom;
 	locale[6][3] = altarRoom;
 }
 

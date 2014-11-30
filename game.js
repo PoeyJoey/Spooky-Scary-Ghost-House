@@ -4,7 +4,7 @@
 
 
 //
-// Command Input
+// Keyboard Command Input
 //
 function commandInput(command) {
 	command = command.toLowerCase();
@@ -314,6 +314,15 @@ function take() {
 function bag() {
 	var message = "Your bag contains:" + "\n\n";
 	
+	if (inventory.length > 0) {
+		for (var i = 0; i < inventory.length; i++) {
+			message = message + inventory[i] + "\n";
+		}
+	} else {
+		message = message + "Nothing";
+	}
+	
+	/*
 	if (mirrorShard.has === true || ballOfYarn.has === true || map.has === true || pictureBook.has === true){
 		if (mirrorShard.has === true){
 			message = message + mirrorShard.name + "\n";
@@ -333,6 +342,7 @@ function bag() {
 	} else {
 		message = message + "Nothing";
 	}
+	*/
 	
 	updateDisplay(message);
 }

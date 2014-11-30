@@ -43,7 +43,10 @@ var locale = [];
 var currentLoc = null;
 var direction = [];
 
-// Items
+// Items and Inventory
+var items = [];
+var inventory = [];
+
 var mirrorShard = null;
 var ballOfYarn = null;
 var map = null;
