@@ -8,6 +8,7 @@
 //
 function Item() {
 	this.name = "";
+	this.find = "";
 	this.has = false;
 	
 	this.take = 	function() {
@@ -24,6 +25,7 @@ function Item() {
 //
 function initItems() {
 	mirrorShard = new Item();
+	mirrorShard.find = "Broken shards of the mirror are on the ground in front of the mirror.";
 	mirrorShard.name = "Broken Mirror Shard";
 	
 	ballOfYarn = new Item();

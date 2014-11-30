@@ -74,7 +74,7 @@ function goDirection(goDirection) {
 			if (canGoNorth){
 				northSouth -= 1;
 				directionMessage = "You went north.";
-				roomfind();
+				roomFind();
 			} else{
 				directionMessage = "You can't go that way!";
 			}
@@ -86,7 +86,7 @@ function goDirection(goDirection) {
 			if (canGoEast) {
 				eastWest += 1;
 				directionMessage = "You went east.";
-				roomfind();
+				roomFind();
 			} else {
 				directionMessage = "You can't go that way!";
 			}
@@ -98,7 +98,7 @@ function goDirection(goDirection) {
 			if (canGoSouth) {
 				northSouth += 1;
 				directionMessage = "You went south.";
-				roomfind();
+				roomFind();
 			} else {
 				directionMessage = "You can't go that way!";
 			}
@@ -110,7 +110,7 @@ function goDirection(goDirection) {
 			if (canGoWest) {
 				eastWest -= 1;
 				directionMessage = "You went west.";
-				roomfind();
+				roomFind();
 			} else {
 				directionMessage = "You can't go that way!";
 			}
@@ -130,7 +130,7 @@ function goDirection(goDirection) {
 //
 // Room Finding
 //
-function roomfind() {
+function roomFind() {
 	switch (eastWest) {
 		case 1:
 			if (northSouth === 2) {
@@ -201,14 +201,14 @@ function updateDisplay(message) {
 	updateScore();
 }
 
-function displayDirection(message) {
-	// Tells the user what direction they went
-	document.getElementById("taMain").value = message + "\n\n" + document.getElementById("taMain").value;
-}
-
 function updateScore() {
 	// Changes the score
 	document.getElementById("scoreBox").value = score;
+}
+
+function displayDirection(message) {
+	// Tells the user what direction they went
+	document.getElementById("taMain").value = message + "\n\n" + document.getElementById("taMain").value;
 }
 
 function btnDisable() {
@@ -374,7 +374,7 @@ function error() {
 function start() {
 	// Initializes the game
 	initItems();
-	roomfind();
+	roomFind();
 	document.getElementById("btnEast").disabled = !canGoEast;
 	document.getElementById("btnNorth").disabled = !canGoNorth;
 	document.getElementById("btnSouth").disabled = !canGoSouth;

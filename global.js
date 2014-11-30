@@ -38,8 +38,13 @@ var hasVisitedAltarRoom = false;
 var score = 0;
 var typeError = 0;
 
+// Locales
+var mirrorRoom = null;
+
+
 // Items
 var mirrorShard = null;
 var ballOfYarn = null;
 var map = null;
 var pictureBook = null;
+var motivationalCatPoster = null;
