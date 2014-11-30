@@ -7,7 +7,7 @@
 // Base Class - Locale
 //
 function Locale() {
-	this.id = null;
+	this.id = "";
 	this.name = "";
 	this.desc = "";
 	
@@ -26,10 +26,18 @@ function Locale() {
 								this.hasVisited = true;
 								score += 5;
 							}
+							
 							var message = this.desc;
+							
 							if (this.hasItem){
-								message = message + "\n\n" + this.item.find;
+								message = message + "\n\n" + this.item.see;
 							}
+							
+							canGoNorth = this.canGoNorth;
+							canGoEast = this.canGoEast;
+							canGoSouth = this.canGoSouth;
+							canGoWest = this.canGoWest;
+							
 							updateDisplay(message);
 						}
 }
@@ -153,16 +161,60 @@ function initLocale() {
 	altarRoom.canGoSouth = false;
 	altarRoom.canGoWest = true;
 	
-	// Rooms stored in locale using their coordinates
+	var error = new Locale();
+	error.id = "error";
+	error.name = "Error Room";
+	error.desc = "This room is an error. Something went wrong! Please email me where you where when this error occurred.";
+	error.canGoNorth = false;
+	error.canGoEast = false;
+	error.canGoSouth = false;
+	error.canGoWest = false;
+	
+	
+	//
+	// Rooms stored in locale array using their coordinates (first digit is east-west and the second digit is north-south)
+	//
+	
+	// Unused 0 East-West
+	locale[0][0] = error;
+	locale[0][1] = error;
+	locale[0][2] = error;
+	locale[0][3] = error;
+	
+	// 1 East-West
+	locale[1][0] = error;
+	locale[1][1] = error;
 	locale[1][2] = mirrorRoom;
+	locale[1][3] = error;
+	
+	// 2 East-West
+	locale[2][0] = error;
 	locale[2][1] = mattressRoom;
 	locale[2][2] = centerRoom;
 	locale[2][3] = trainRoom;
+	
+	// 3 East-West
+	locale[3][0] = error;
+	locale[3][1] = error;
 	locale[3][2] = catHallwayRoom;
+	locale[3][3] = error;
+	
+	// 4 East-West
+	locale[4][0] = error;
 	locale[4][1] = secretRoom;
 	locale[4][2] = catRoom;
 	locale[4][3] = toyRoom;
+	
+	// 5 East-West
+	locale[5][0] = error;
+	locale[5][1] = error;
+	locale[5][2] = error;
 	locale[5][3] = ghostCatRoom;
+	
+	// 6 East-West
+	locale[6][0] = error;
+	locale[6][1] = error;
+	locale[6][2] = error;
 	locale[6][3] = altarRoom;
 }
 

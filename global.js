@@ -38,8 +38,10 @@ var hasVisitedAltarRoom = false;
 var score = 0;
 var typeError = 0;
 
-// Locale Array
+// Location and direction tracking
 var locale = [];
+var currentLoc = null;
+var direction = [];
 
 // Items
 var mirrorShard = null;
