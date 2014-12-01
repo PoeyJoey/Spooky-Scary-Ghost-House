@@ -1,143 +1,143 @@
 <!DOCTYPE html>
 <html>
-<!--	Joey M. Pupel
-			11/30/2014
-			Project 5 	-->
-	<head>
-		<meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
-		<meta name="author" content="Joey M. Pupel" />
-		<title>
-			Spooky Scary Ghost House
-		</title>
-		<style>
-			.title {font-weight: bold;}
-			.description {font-style: italic;}
-			.footer {color: purple; font-weight: bold;}
-			.button{width: 102px; height: 25px;}
-		</style>
-		<script type="text/javascript" src="global.js"		></script>
-		<script type="text/javascript" src="locations.js"	></script>
-		<script type="text/javascript" src="game.js"			></script>
-		<script type="text/javascript" src="items.js"			></script>
-	</head>
-	<body onload="start();">
-	
-		<h2>
-			Spooky Scary Ghost House
-		</h2>
-		
-		<textarea rows="15" cols="43" id="taMain" disabled></textarea>
-		
-		<br>
-		
-		<table>
-			<tr>
-				<td>
-					&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-					
-					<input
-						type="button"
-						value="North"
-						onclick="goDirection('north');"
-						id="btnNorth"
-						class="button"
-						disabled />
-					
-					<br>
-					
-					<input
-						type="button"
-						value="West"
-						onclick="goDirection('west');"
-						id="btnWest"
-						class="button"
-						disabled />
-					
-					<input
-						type="button"
-						value="East"
-						onclick="goDirection('east');"
-						id="btnEast"
-						class="button"
-						disabled />
-					
-					<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-					
-					<input
-						type="button"
-						value="South"
-						onclick="goDirection('south');"
-						id="btnSouth"
-						class="button"
-						disabled />
-				</td>
-				
-				<td>
-					<input
-						type="button"
-						value="Take"
-						onclick="take();"
-						id="btnTake"
-						class="button" />
-					
-					<br>
-					
-					<input
-						type="button"
-						value="Bag"
-						onclick="bag();"
-						id="btnBag"
-						class="button" />
-					
-					<br>
-					
-					<input
-						type="button"
-						value="Help"
-						onclick="help();"
-						id="btnHelp"
-						class="button"/>
-				</td>
-			</tr>
-		</table>	
-		
-		Command:
-		<input	type="text" 
-					id = "txtCommand"
-					name="txtCommand"
-					onkeydown = "if (event.keyCode == 13) commandInput(document.getElementById('txtCommand').value);"
-					style="width: 187px"
-					disabled />
-				
-		<input	type="button"
-					id = "btnGo"
-					value="Go" 
-					onclick="commandInput(document.getElementById('txtCommand').value);"
-					disabled />
-				
-		<br><br>
-		
-		Score:
-		<input	type="text"
-					id="scoreBox"
-					value="0"
-					style="width: 50px; text-align: center"
-					disabled>
-		
-		<br><br><br>
-		
-		<img src="mapX.png" id="map" width="600" height="312" style="visibility: hidden;">
-		
-		<br> <br> <br> <br> <br>
-		
-		<a href="mailto:Joseph.Pupel1@marist.edu">
-			E-mail Me!
-		</a>
-		
-		<p class="footer">
-			<a href="http://validator.w3.org/#validate_by_input">
-				Validate as HTML5
-			</a>
-		</p>
-	</body>
+<!--    Joey M. Pupel
+            11/30/2014
+            Project 5     -->
+    <head>
+        <meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
+        <meta name="author" content="Joey M. Pupel" />
+        <title>
+            Spooky Scary Ghost House
+        </title>
+        <style>
+            .title {font-weight: bold;}
+            .description {font-style: italic;}
+            .footer {color: purple; font-weight: bold;}
+            .button{width: 102px; height: 25px;}
+        </style>
+        <script type="text/javascript" src="global.js"        ></script>
+        <script type="text/javascript" src="locations.js"    ></script>
+        <script type="text/javascript" src="game.js"            ></script>
+        <script type="text/javascript" src="items.js"            ></script>
+    </head>
+    <body onload="start();">
+    
+        <h2>
+            Spooky Scary Ghost House
+        </h2>
+        
+        <textarea rows="15" cols="43" id="taMain" disabled></textarea>
+        
+        <br>
+        
+        <table>
+            <tr>
+                <td>
+                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                    
+                    <input
+                        type="button"
+                        value="North"
+                        onclick="goDirection('north');"
+                        id="btnNorth"
+                        class="button"
+                        disabled />
+                    
+                    <br>
+                    
+                    <input
+                        type="button"
+                        value="West"
+                        onclick="goDirection('west');"
+                        id="btnWest"
+                        class="button"
+                        disabled />
+                    
+                    <input
+                        type="button"
+                        value="East"
+                        onclick="goDirection('east');"
+                        id="btnEast"
+                        class="button"
+                        disabled />
+                    
+                    <br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                    
+                    <input
+                        type="button"
+                        value="South"
+                        onclick="goDirection('south');"
+                        id="btnSouth"
+                        class="button"
+                        disabled />
+                </td>
+                
+                <td>
+                    <input
+                        type="button"
+                        value="Take"
+                        onclick="take();"
+                        id="btnTake"
+                        class="button" />
+                    
+                    <br>
+                    
+                    <input
+                        type="button"
+                        value="Bag"
+                        onclick="bag();"
+                        id="btnBag"
+                        class="button" />
+                    
+                    <br>
+                    
+                    <input
+                        type="button"
+                        value="Help"
+                        onclick="help();"
+                        id="btnHelp"
+                        class="button"/>
+                </td>
+            </tr>
+        </table>    
+        
+        Command:
+        <input    type="text" 
+                    id = "txtCommand"
+                    name="txtCommand"
+                    onkeydown = "if (event.keyCode == 13) commandInput(document.getElementById('txtCommand').value);"
+                    style="width: 187px"
+                    disabled />
+                
+        <input    type="button"
+                    id = "btnGo"
+                    value="Go" 
+                    onclick="commandInput(document.getElementById('txtCommand').value);"
+                    disabled />
+                
+        <br><br>
+        
+        Score:
+        <input    type="text"
+                    id="scoreBox"
+                    value="0"
+                    style="width: 50px; text-align: center"
+                    disabled>
+        
+        <br><br><br>
+        
+        <img src="mapX.png" id="map" width="600" height="312" style="visibility: hidden;">
+        
+        <br> <br> <br> <br> <br>
+        
+        <a href="mailto:Joseph.Pupel1@marist.edu">
+            E-mail Me!
+        </a>
+        
+        <p class="footer">
+            <a href="http://validator.w3.org/#validate_by_input">
+                Validate as HTML5
+            </a>
+        </p>
+    </body>
 </html>
