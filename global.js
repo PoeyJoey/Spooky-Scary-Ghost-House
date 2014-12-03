@@ -30,9 +30,3 @@ var direction = [];
 // Items and Inventory
 var item = [];
 var inventory = [];
-
-var mirrorShard = null;
-var ballOfYarn = null;
-var map = null;
-var pictureBook = null;
-var motivationalCatPoster = null;
