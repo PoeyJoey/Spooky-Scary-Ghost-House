@@ -23,9 +23,14 @@ var score = 0;
 var typeError = 0;
 
 // Location and direction tracking
-var locale = new Array(8);
+var locale = [];
 var currentLoc = null;
-var direction = [];
+var direction = [
+			/* N */	-1,
+			/* E */	 1,
+			/* S */	 1,
+			/* W */	-1
+				];
 
 // Items and Inventory
 var item = [];

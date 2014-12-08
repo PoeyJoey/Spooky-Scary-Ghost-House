@@ -15,13 +15,19 @@ function commandInput(command) {
 		// Goes to direction finding function
 		case "north":
 		case "n":
+			goDirection(0);
+			break;
 		case "east":
 		case "e":
+			goDirection(1);
+			break;
 		case "south":
 		case "s":
+			goDirection(2);
+			break;
 		case "west":
 		case "w":
-			goDirection(command);
+			goDirection(3);
 			break;
 			
 		// Goes to the bag function
@@ -61,59 +67,21 @@ function commandInput(command) {
 //
 // Direction Pathing
 //
-function goDirection(goDirection) {
-
-	var directionMessage = "";
+function goDirection(wentDirection) {
 	
 	// Finds what direction the player went and changes their room coordinates accordingly
-	switch(goDirection) {
+	switch(wentDirection) {
 		
-		// Going North
-		case "north":
-		case "n":
-			if (canGoNorth){
-				northSouth -= 1;
-				directionMessage = "You went north.";
-				roomFind();
-			} else{
-				directionMessage = "You can't go that way!";
-			}
+		// Going North or South
+		case 0:
+		case 2:
+			northSouth += direction[wentDirection];
 			break;
 			
-		// Going East
-		case "east":
-		case "e":
-			if (canGoEast) {
-				eastWest += 1;
-				directionMessage = "You went east.";
-				roomFind();
-			} else {
-				directionMessage = "You can't go that way!";
-			}
-			break;
-			
-		// Going South
-		case "south":
-		case "s":
-			if (canGoSouth) {
-				northSouth += 1;
-				directionMessage = "You went south.";
-				roomFind();
-			} else {
-				directionMessage = "You can't go that way!";
-			}
-			break;
-			
-		// Going West
-		case "west":
-		case "w":
-			if (canGoWest) {
-				eastWest -= 1;
-				directionMessage = "You went west.";
-				roomFind();
-			} else {
-				directionMessage = "You can't go that way!";
-			}
+		// Going East or West
+		case 1:
+		case 3:
+			eastWest += direction[wentDirection];
 			break;
 			
 		// Error Direction
@@ -121,6 +89,39 @@ function goDirection(goDirection) {
 			// Display this message if something bad happened
 			error();
 			break;
+	}
+	
+	if (locale[eastWest][northSouth] === null) {
+		directionMessage = "You can't go that way!";
+		switch (wentDirection){
+			case 0:
+			case 2:
+				northSouth -= direction[wentDirection];
+				break;
+			case 1:
+			case 3:
+				eastWest -= direction[wentDirection];
+				break;
+		}
+	} else {
+		var directionMessage = "";
+		
+		switch (wentDirection){
+			case 0:
+				directionMessage = "You went north.";
+				break;
+			case 1:
+				directionMessage = "You went east.";
+				break;
+			case 2:
+				directionMessage = "You went south.";
+				break;
+			case 3:
+				directionMessage = "You went west.";
+				break;
+		}
+		
+		roomFind();
 	}
 	
 	// Displays the direction the player went.
@@ -182,18 +183,18 @@ function take() {
 	
 	// Special Occurrences that happen when an Item is taken
 	
-	// if player picks up the map, show the map below
+	// if player has the map and the map is not shown below, show the map below
 	if (item[2].has && document.getElementById("map").style.visibility === "hidden") {
 		document.getElementById("map").style.visibility = "visible";
 	}
 	
-	// if player tried to take the cat poster and they cannot see the mirror shard, let them see/take the mirror shard
-	if (item[4].failedTake && !locale[1][2].seeItem) {
+	// if player tried to take the cat poster and they cannot see the mirror shard and they do not have the mirror shard, let them see/take the mirror shard
+	if (item[4].failedTake && !locale[1][2].seeItem && !item[0].has) {
 		locale[1][2].seeItem = true;
 	}
 	
-	// if player has the mirror shard and cannot take the cat poster, allow them to take the cat poster
-	if (item[0].has && !item[4].canTake) {
+	// if player has the mirror shard and cannot take the cat poster and does not have the cat poster, allow them to take the cat poster
+	if (item[0].has && !item[4].canTake && !item[4].has) {
 		item[4].canTake = true;
 	}
 }
@@ -242,7 +243,7 @@ function error() {
 	// TODO - add something to show where the error came from (error number)
 
 	// Display this message if the game is broken somehow
-	var message = "The cats are here for you. You broke it!";
+	var message = "The cats are here for you. You broke it! It should have never happened.";
 	updateDisplay(message);
 }
 

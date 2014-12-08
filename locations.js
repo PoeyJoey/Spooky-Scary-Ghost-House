@@ -43,8 +43,8 @@ function Locale() {
 	
 	// This is for special occurrences such as when the player visits a specific room for the first time.
 	this.occurrences =	function() {
-							// if player has visited the ghost cat room and they cannot try to take the cat poster in the cat hallway, let be able to take it
-							if (locale[5][3].hasVisited && !locale[3][2].seeItem) {
+							// if player has visited the ghost cat room and they cannot take the cat poster and they don't have the cat poster, let be able to take it
+							if (locale[5][3].hasVisited && !locale[3][2].seeItem && !item[4].has) {
 								locale[3][2].seeItem = true;
 							}
 							
@@ -213,28 +213,21 @@ function initLocale() {
 	altarRoom.canGoSouth = false;
 	altarRoom.canGoWest = true;
 	
-	var errorRoom = new Locale();
-	errorRoom.name = "Error Room";
-	errorRoom.desc = "This room is an error room. Please email me where you were and what you did when this error occurred.";
-	errorRoom.canGoNorth = false;
-	errorRoom.canGoEast = false;
-	errorRoom.canGoSouth = false;
-	errorRoom.canGoWest = false;
-	
 	
 	//
 	// Rooms stored in locale array using their coordinates (first digit is east-west and the second digit is north-south)
 	//
 	
+	
 	// turns locale array into a two dimensional array.
-	for (var i = 0; i < 9; i++) {
-		locale[i] = new Array(5);
+	for (var i = 0; i < 8; i++) {
+		locale[i] = [];
 	}
 	
 	// makes all locale array values in the 8 by 5 grid "errorRoom" (locale[0 through 7][0 through 4] = errorRoom)
-	for (var x = 0; x < 9; x++) {
-		for (var y = 0; y < 6; y++) {
-			locale[x][y] = errorRoom;
+	for (var x = 0; x < 8; x++) {
+		for (var y = 0; y < 5; y++) {
+			locale[x][y] = null;
 		}
 	}
 	
