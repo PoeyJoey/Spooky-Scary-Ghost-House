@@ -15,10 +15,7 @@ function Locale() {
 	
 	this.hasVisited = false;
 	
-	this.canGoNorth = null;
-	this.canGoEast = null;
-	this.canGoSouth = null;
-	this.canGoWest = null;
+	this.canVisit = true;
 	
 	this.visit =	function() {
 						// adds score if the player has not visited the room before
@@ -26,9 +23,6 @@ function Locale() {
 						
 						// runs the occurrences function
 						this.occurrences();
-						
-						// changes the canGo global variables based on the room
-						this.canGo();
 						
 						// updates the message based on the room
 						this.message();
@@ -60,7 +54,7 @@ function Locale() {
 										inventory.splice(i, 1);
 									}
 								}
-								locale[4][2].canGoSouth = true;
+								locale[4][3].canVisit = true;
 								locale[4][2].desc = "You stand in a room filled with cats playing with a ball of yarn over in the corner of the room. They no longer block the door to the south."
 							}
 							
@@ -69,23 +63,16 @@ function Locale() {
 								var message = "You hold up the motivational cat poster. The ghost cat's eyes suddenly dart open and he launches through the ceiling. Good thing he's a ghost cat.";
 								updateDisplay(message);
 								
-								locale[5][3].canGoEast = true;
+								locale[6][3].canVisit = true;
 								locale[5][3].desc = "You stand in an empty room. The ghost cat that was here is gone now and hasn't come back yet. Better hurry."
 							}
 							
 							// This part of the puzzle is a WIP
 							// TODO: Make the user go to the mattress room for part of the puzzle.
 							if (item[3].has && currentLoc === locale[4][2]) {
-								locale[4][2].canGoNorth = true;
+								locale[4][1].canVisit = true;
 							}
 						}
-	
-	this.canGo =	function() {
-						canGoNorth = this.canGoNorth;
-						canGoEast = this.canGoEast;
-						canGoSouth = this.canGoSouth;
-						canGoWest = this.canGoWest;
-					}
 	
 	this.message =	function() {
 						var message = this.desc;
@@ -110,19 +97,11 @@ function initLocale() {
 	mirrorRoom.seeItem = false;
 	// item is the mirror shard (item [0])
 	mirrorRoom.item = item[0];
-	mirrorRoom.canGoNorth = false;
-	mirrorRoom.canGoEast = true;
-	mirrorRoom.canGoSouth = false;
-	mirrorRoom.canGoWest = false;
 	
 	// (2,1)
 	var mattressRoom = new Locale();
 	mattressRoom.name = "Mattress Room";
 	mattressRoom.desc = "You stand in a room with a door to the south. There are mattresses piled up against the walls that block the windows.";
-	mattressRoom.canGoNorth = false;
-	mattressRoom.canGoEast = false;
-	mattressRoom.canGoSouth = true;
-	mattressRoom.canGoWest = false;
 	
 	// (2,2)
 	var centerRoom = new Locale();
@@ -131,10 +110,6 @@ function initLocale() {
 	centerRoom.seeItem = true;
 	// item is the map (item [2])
 	centerRoom.item = item[2];
-	centerRoom.canGoNorth = true;
-	centerRoom.canGoEast = true;
-	centerRoom.canGoSouth = true;
-	centerRoom.canGoWest = true;
 	
 	// (2,3)
 	var trainRoom = new Locale();
@@ -143,10 +118,6 @@ function initLocale() {
 	trainRoom.seeItem = true;
 	// item is the ball of yarn (item [1])
 	trainRoom.item = item[1];
-	trainRoom.canGoNorth = true;
-	trainRoom.canGoEast = false;
-	trainRoom.canGoSouth = false;
-	trainRoom.canGoWest = false;
 	
 	// (3,2)
 	var catHallwayRoom = new Locale();
@@ -156,50 +127,30 @@ function initLocale() {
 	catHallwayRoom.seeItem = false;
 	// item is the motivational cat poster (item[4])
 	catHallwayRoom.item = item[4];
-	catHallwayRoom.canGoNorth = false;
-	catHallwayRoom.canGoEast = true;
-	catHallwayRoom.canGoSouth = false;
-	catHallwayRoom.canGoWest = true;
 	
 	// (4,1)
 	var secretRoom = new Locale();
 	secretRoom.name = "Secret Room";
 	secretRoom.desc = "You found the exit! Although the game isn't finished yet... You'll have to solve a puzzle to get here in the next version. (involves items)";
-	// This is the final room. There is no reason for the player to go any direction.
-	secretRoom.canGoNorth = false;
-	secretRoom.canGoEast = false;
-	secretRoom.canGoSouth = false;
-	secretRoom.canGoWest = false;
+	// canVisit will be unlocked when the player picks up the picture book.
+	secretRoom.canVisit = false;
 	
 	// (4,2)
 	var catRoom = new Locale();
 	catRoom.name = "Cat Room";
 	catRoom.desc = "You stand in a room filled with cats crawling all over the walls. They're blocking the door to the south.";
-	// canGoNorth will be unlocked when the player picks up the picture book.
-	catRoom.canGoNorth = false;
-	catRoom.canGoEast = false;
-	// canGoSouth will be unlocked when the player picks up the ball of yarn.
-	catRoom.canGoSouth = false;
-	catRoom.canGoWest = true;
 	
 	// (4,3)
 	var toyRoom = new Locale();
 	toyRoom.name = "Toy Room";
 	toyRoom.desc = "There are cat toys scattered around the room. You now see why so many cats were trying to get in here.";
-	toyRoom.canGoNorth = true;
-	toyRoom.canGoEast = true;
-	toyRoom.canGoSouth = false;
-	toyRoom.canGoWest = false;
+	// canVisit will be unlocked when the player picks up the ball of yarn.
+	toyRoom.canVisit = false;
 	
 	// (5,3)
 	var ghostCatRoom = new Locale();
 	ghostCatRoom.name = "Ghost Cat Room";
 	ghostCatRoom.desc = "A giant sleeping ghost cat blocks the way to the next room. Nothing you do will make it move.";
-	ghostCatRoom.canGoNorth = false;
-	// canGoEast will be unlocked when player picks up the motivational cat poster.
-	ghostCatRoom.canGoEast = false;
-	ghostCatRoom.canGoSouth = false;
-	ghostCatRoom.canGoWest = true;
 	
 	// (6,3)
 	var altarRoom = new Locale();
@@ -208,10 +159,8 @@ function initLocale() {
 	altarRoom.seeItem = true;
 	// item is the picture book (item[3])
 	altarRoom.item = item[3];
-	altarRoom.canGoNorth = false;
-	altarRoom.canGoEast = false;
-	altarRoom.canGoSouth = false;
-	altarRoom.canGoWest = true;
+	// canVisit will be unlocked when player picks up the motivational cat poster.
+	altarRoom.canVisit = false;
 	
 	
 	//

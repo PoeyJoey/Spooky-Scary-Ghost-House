@@ -69,6 +69,8 @@ function commandInput(command) {
 //
 function goDirection(wentDirection) {
 	
+	var directionMessage = "";
+	
 	// Finds what direction the player went and changes their room coordinates accordingly
 	switch(wentDirection) {
 		
@@ -91,7 +93,9 @@ function goDirection(wentDirection) {
 			break;
 	}
 	
+	// Determines if the direction the player went was valid
 	if (locale[eastWest][northSouth] === null) {
+	
 		directionMessage = "You can't go that way!";
 		switch (wentDirection){
 			case 0:
@@ -103,8 +107,8 @@ function goDirection(wentDirection) {
 				eastWest -= direction[wentDirection];
 				break;
 		}
+		
 	} else {
-		var directionMessage = "";
 		
 		switch (wentDirection){
 			case 0:
@@ -163,10 +167,44 @@ function displayDirection(message) {
 
 function btnDisable() {
 	// Disables the buttons
-	document.getElementById("btnEast").disabled = !currentLoc.canGoEast;
-	document.getElementById("btnNorth").disabled = !currentLoc.canGoNorth;
-	document.getElementById("btnSouth").disabled = !currentLoc.canGoSouth;
-	document.getElementById("btnWest").disabled = !currentLoc.canGoWest;
+	
+	var north = locale[eastWest][northSouth - 1];
+	var east = locale[eastWest + 1][northSouth];
+	var south = locale[eastWest][northSouth + 1];
+	var west = locale[eastWest - 1][northSouth];
+	
+	// Disables North Button
+	if(north === null || !north.canVisit) {
+		canGoNorth = false;
+	} else {
+		canGoNorth = true;
+	}
+	
+	//Disables East Button
+	if(east === null || !east.canVisit) {
+		canGoEast = false;
+	} else {
+		canGoEast = true;
+	}
+	
+	//Disables South Button
+	if(south === null || !south.canVisit) {
+		canGoSouth = false;
+	} else {
+		canGoSouth = true;
+	}
+	
+	//Disables West Button
+	if(west === null || !west.canVisit) {
+		canGoWest = false;
+	} else {
+		canGoWest = true;
+	}
+	
+	document.getElementById("btnNorth").disabled = !canGoNorth;
+	document.getElementById("btnEast").disabled = !canGoEast;
+	document.getElementById("btnSouth").disabled = !canGoSouth;
+	document.getElementById("btnWest").disabled = !canGoWest;
 }
 
 
