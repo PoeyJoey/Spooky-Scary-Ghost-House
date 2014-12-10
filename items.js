@@ -18,20 +18,30 @@ function Item() {
 	
 	this.take = 	function() {
 						if (this.canTake) {
+							// can no longer take this item
 							this.canTake = false;
+							// player has this item
 							this.has = true;
 							
 							// changes the room to no longer have an item
 							currentLoc.seeItem = false;
+							currentLoc.item = null;
 							
+							// adds item to inventory
 							inventory[inventory.length] = this.name;
 							
+							// adds score
 							score += 5;
+							
+							// sets pick-up message
 							var message = "You found a " + this.name + "." + "\n" + "You put it into your bag.";
 						} else {
+							// sets pick-up message to the noTake message
 							var message = this.noTake;
+							// sets failedTake to true (for use with occurrences)
 							this.failedTake = true;
 						}
+						// displays pick-up message
 						updateDisplay(message);
 					}
 }

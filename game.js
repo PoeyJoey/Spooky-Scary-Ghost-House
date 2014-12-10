@@ -208,31 +208,19 @@ function btnDisable() {
 // Take Command
 //
 function take() {
-
+	
+	// runs .take item function if player can see an item
 	if (currentLoc.seeItem) {
+		// TODO - add a fall through if the player sees an item that doesn't exist
 		currentLoc.item.take();
 	} else {
 		updateDisplay("You don't see anything that you need here.")
 	}
 	
+	// Special occurrences
+	occurrences();
+	
 	btnDisable();
-	
-	// Special Occurrences that happen when an Item is taken
-	
-	// if player has the map and the map is not shown below, show the map below
-	if (item[2].has && document.getElementById("map").style.visibility === "hidden") {
-		document.getElementById("map").style.visibility = "visible";
-	}
-	
-	// if player tried to take the cat poster and they cannot see the mirror shard and they do not have the mirror shard, let them see/take the mirror shard
-	if (item[4].failedTake && !locale[1][2].seeItem && !item[0].has) {
-		locale[1][2].seeItem = true;
-	}
-	
-	// if player has the mirror shard and cannot take the cat poster and does not have the cat poster, allow them to take the cat poster
-	if (item[0].has && !item[4].canTake && !item[4].has) {
-		item[4].canTake = true;
-	}
 }
 
 
@@ -274,7 +262,7 @@ function help() {
 //
 // Occurrences
 //
-function occurances() {
+function occurrences() {
 	// See Map
 	// if	player has the map
 	// and	the map is hidden

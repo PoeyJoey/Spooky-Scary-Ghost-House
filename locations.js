@@ -22,7 +22,7 @@ function Locale() {
 						this.scoreRoom();
 						
 						// runs the occurrences function
-						this.occurrences();
+						occurrences();
 						
 						// updates the message based on the room
 						this.message();
@@ -32,45 +32,6 @@ function Locale() {
 							if (!this.hasVisited) {
 								this.hasVisited = true;
 								score += 5;
-							}
-						}
-	
-	// This is for special occurrences such as when the player visits a specific room for the first time.
-	this.occurrences =	function() {
-							// if player has visited the ghost cat room and they cannot take the cat poster and they don't have the cat poster, let be able to take it
-							if (locale[5][3].hasVisited && !locale[3][2].seeItem && !item[4].has) {
-								locale[3][2].seeItem = true;
-							}
-							
-							// if the player has the ball of yarn and they're in the cat room, display a message explaining what happened to the ball of yarn and change the desc of the room
-							if (item[1].has && currentLoc === locale[4][2]) {
-								var message = "You throw the ball of yarn into the corner of the room and all the cats chase after it.";
-								updateDisplay(message);
-								
-								item[1].has = false;
-								// removes ball of yarn from inventory
-								for (var i = 0; i < inventory.length; i++) {
-									if (inventory[i] === item[1].name) {
-										inventory.splice(i, 1);
-									}
-								}
-								locale[4][3].canVisit = true;
-								locale[4][2].desc = "You stand in a room filled with cats playing with a ball of yarn over in the corner of the room. They no longer block the door to the south.";
-							}
-							
-							// if the player has the cat poster and they're in the ghost cat room, display a message explaining what happened to the ghost cat and change the desc of the room
-							if (item[4].has && currentLoc === locale[5][3]) {
-								var message = "You hold up the motivational cat poster. The ghost cat's eyes suddenly dart open and he launches through the ceiling. Good thing he's a ghost cat.";
-								updateDisplay(message);
-								
-								locale[6][3].canVisit = true;
-								locale[5][3].desc = "You stand in an empty room. The ghost cat that was here is gone now and hasn't come back yet. Better hurry.";
-							}
-							
-							// This part of the puzzle is a WIP
-							// TODO: Make the user go to the mattress room for part of the puzzle.
-							if (item[3].has && currentLoc === locale[4][2]) {
-								locale[4][1].canVisit = true;
 							}
 						}
 	
