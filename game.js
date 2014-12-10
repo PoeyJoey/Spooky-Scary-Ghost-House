@@ -340,8 +340,14 @@ function occurrences() {
 	
 	// This part of the puzzle is a WIP
 	// TODO: Make the user go to the mattress room for part of the puzzle.
-	if (item[3].has && currentLoc === locale[4][2]) {
+	// Picture Book Kitten
+	// if	player has picture book
+	// and	player in mattress room
+	if (item[3].has && currentLoc === locale[2][1]) {
+		// allow player to go to final room
 		locale[4][1].canVisit = true;
+		
+		// 
 	}
 }
 

@@ -13,7 +13,7 @@ function Item() {
 	// canTake is for when the player can see the item, but cant take the item for whatever reason
 	this.canTake = true;
 	// message to be shown only if the player can't take the item for whatever reason
-	this.noTake = "";
+	this.noTake = "Error: this should not have happened.";
 	this.failedTake = false;
 	
 	this.take = 	function() {
@@ -36,7 +36,7 @@ function Item() {
 							// sets pick-up message
 							var message = "You found a " + this.name + "." + "\n" + "You put it into your bag.";
 						} else {
-							// sets pick-up message to the noTake message
+							// sets pick-up message to the noTake message of the item
 							var message = this.noTake;
 							// sets failedTake to true (for use with occurrences)
 							this.failedTake = true;

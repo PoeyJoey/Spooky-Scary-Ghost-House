@@ -62,7 +62,7 @@ function initLocale() {
 	// (2,1)
 	var mattressRoom = new Locale();
 	mattressRoom.name = "Mattress Room";
-	mattressRoom.desc = "You stand in a room with a door to the south. There are mattresses piled up against the walls that block the windows.";
+	mattressRoom.desc = "You stand in a room with a door to the south. There are mattresses piled up against the walls that block the windows. You see something move out of the corner of your eye, but when you look, it's gone. Must be rats.";
 	
 	// (2,2)
 	var centerRoom = new Locale();
