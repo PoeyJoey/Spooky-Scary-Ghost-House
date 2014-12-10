@@ -48,7 +48,7 @@ function commandInput(command) {
 			help();
 			break;
 			
-		// Error Message
+		// Typing Error Message
 		default:
 			// Display this message if the user typed incorrectly
 			if (typeError === 5) {
@@ -70,20 +70,34 @@ function commandInput(command) {
 function goDirection(wentDirection) {
 	
 	var directionMessage = "";
+	var tempNorthSouth = northSouth;
+	var tempEastWest = eastWest;
 	
-	// Finds what direction the player went and changes their room coordinates accordingly
+	// Finds what direction the player went and changes the temp values accordingly
 	switch(wentDirection) {
 		
-		// Going North or South
+		// Going North
 		case 0:
-		case 2:
-			northSouth += direction[wentDirection];
+			directionMessage = "You went north.";
+			tempNorthSouth -= 1;
 			break;
 			
-		// Going East or West
+		// Going South
+		case 2:
+			directionMessage = "You went south.";
+			tempNorthSouth += 1;
+			break;
+			
+		// Going East
 		case 1:
+			directionMessage = "You went east.";
+			tempEastWest += 1;
+			break;
+			
+		// Going West
 		case 3:
-			eastWest += direction[wentDirection];
+			directionMessage = "You went west.";
+			tempEastWest -= 1;
 			break;
 			
 		// Error Direction
@@ -93,37 +107,20 @@ function goDirection(wentDirection) {
 			break;
 	}
 	
-	// Determines if the direction the player went was valid
-	if (locale[eastWest][northSouth] === null) {
+	var tempLoc = locale[tempEastWest][tempNorthSouth];
 	
+	// Determines if the direction the player went was valid
+	if (tempLoc === null || !tempLoc.canVisit) {
+		
+		// If the player could not go that way
 		directionMessage = "You can't go that way!";
-		switch (wentDirection){
-			case 0:
-			case 2:
-				northSouth -= direction[wentDirection];
-				break;
-			case 1:
-			case 3:
-				eastWest -= direction[wentDirection];
-				break;
-		}
 		
 	} else {
 		
-		switch (wentDirection){
-			case 0:
-				directionMessage = "You went north.";
-				break;
-			case 1:
-				directionMessage = "You went east.";
-				break;
-			case 2:
-				directionMessage = "You went south.";
-				break;
-			case 3:
-				directionMessage = "You went west.";
-				break;
-		}
+		// If the player could go that way
+		northSouth = tempNorthSouth;
+		eastWest = tempEastWest;
+		currentLoc = tempLoc;
 		
 		roomFind();
 	}
@@ -136,8 +133,6 @@ function goDirection(wentDirection) {
 // Room Finding
 //
 function roomFind() {
-
-	currentLoc = locale[eastWest][northSouth];
 	
 	currentLoc.visit();
 	
@@ -173,28 +168,28 @@ function btnDisable() {
 	var south = locale[eastWest][northSouth + 1];
 	var west = locale[eastWest - 1][northSouth];
 	
-	// Disables North Button
+	// Check North
 	if(north === null || !north.canVisit) {
 		canGoNorth = false;
 	} else {
 		canGoNorth = true;
 	}
 	
-	//Disables East Button
+	// Check East
 	if(east === null || !east.canVisit) {
 		canGoEast = false;
 	} else {
 		canGoEast = true;
 	}
 	
-	//Disables South Button
+	// Check South
 	if(south === null || !south.canVisit) {
 		canGoSouth = false;
 	} else {
 		canGoSouth = true;
 	}
 	
-	//Disables West Button
+	// Check West
 	if(west === null || !west.canVisit) {
 		canGoWest = false;
 	} else {
@@ -205,6 +200,7 @@ function btnDisable() {
 	document.getElementById("btnEast").disabled = !canGoEast;
 	document.getElementById("btnSouth").disabled = !canGoSouth;
 	document.getElementById("btnWest").disabled = !canGoWest;
+	document.getElementById("btnTake").disabled = !currentLoc.seeItem;
 }
 
 
@@ -218,6 +214,8 @@ function take() {
 	} else {
 		updateDisplay("You don't see anything that you need here.")
 	}
+	
+	btnDisable();
 	
 	// Special Occurrences that happen when an Item is taken
 	
@@ -270,6 +268,93 @@ function help() {
 	helpMessage += "'Help'	- Shows this message" + "\n\n";
 	helpMessage += "Your goal is to escape this Spooky Scary Ghost House that most people consider #2spooky."
 	updateDisplay(helpMessage);
+}
+
+
+//
+// Occurrences
+//
+function occurances() {
+	// See Map
+	// if	player has the map
+	// and	the map is hidden
+	if (item[2].has && document.getElementById("map").style.visibility === "hidden") {
+		// show the map
+		document.getElementById("map").style.visibility = "visible";
+	}
+	
+	// See Mirror Shard
+	// if	player tried to take cat poster
+	// and	player cannot see mirror shard
+	// and	player does not have mirror shard
+	if (item[4].failedTake && !locale[1][2].seeItem && !item[0].has) {
+		// player can see mirror shard
+		locale[1][2].seeItem = true;
+	}
+	
+	// Can Take Cat Poster
+	// if	player has mirror shard
+	// and	player cannot take cat poster
+	// and	player does not have cat poster
+	if (item[0].has && !item[4].canTake && !item[4].has) {
+		// player can take cat poster
+		item[4].canTake = true;
+	}
+	
+	// See Cat Poster
+	// if	player has visited ghost cat room
+	// and	player cannot see cat poster
+	// and	player does not have cat poster
+	if (locale[5][3].hasVisited && !locale[3][2].seeItem && !item[4].has) {
+		// player can see cat poster
+		locale[3][2].seeItem = true;
+	}
+	
+	// Throw Yarn in Cat Room
+	// if	player has ball of yarn
+	// and	player in cat room
+	if (item[1].has && currentLoc === locale[4][2]) {
+		// action message
+		var message = "You throw the ball of yarn into the corner of the room and all the cats chase after it.";
+		updateDisplay(message);
+		
+		// removes ball of yarn from inventory
+		for (var i = 0; i < inventory.length; i++) {
+			if (inventory[i] === item[1].name) {
+				inventory.splice(i, 1);
+			}
+		}
+		
+		// player no longer has ball of yarn
+		item[1].has = false;
+		
+		// player can visit toy room
+		locale[4][3].canVisit = true;
+		
+		// changes description of cat room
+		locale[4][2].desc = "You stand in a room filled with cats playing with a ball of yarn over in the corner of the room. They no longer block the door to the south.";
+	}
+	
+	// Ghost Cat Disappear
+	// if	player has cat poster
+	// and	player in ghost cat room
+	if (item[4].has && currentLoc === locale[5][3]) {
+		// action message
+		var message = "You hold up the motivational cat poster. The ghost cat's eyes suddenly dart open and he launches through the ceiling. Good thing he's a ghost cat.";
+		updateDisplay(message);
+		
+		// player can visit altar room
+		locale[6][3].canVisit = true;
+		
+		// changes description of ghost cat room
+		locale[5][3].desc = "You stand in an empty room. The ghost cat that was here is gone now and hasn't come back yet. Better hurry.";
+	}
+	
+	// This part of the puzzle is a WIP
+	// TODO: Make the user go to the mattress room for part of the puzzle.
+	if (item[3].has && currentLoc === locale[4][2]) {
+		locale[4][1].canVisit = true;
+	}
 }
 
 

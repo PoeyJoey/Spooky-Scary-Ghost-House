@@ -55,7 +55,7 @@ function Locale() {
 									}
 								}
 								locale[4][3].canVisit = true;
-								locale[4][2].desc = "You stand in a room filled with cats playing with a ball of yarn over in the corner of the room. They no longer block the door to the south."
+								locale[4][2].desc = "You stand in a room filled with cats playing with a ball of yarn over in the corner of the room. They no longer block the door to the south.";
 							}
 							
 							// if the player has the cat poster and they're in the ghost cat room, display a message explaining what happened to the ghost cat and change the desc of the room
@@ -64,7 +64,7 @@ function Locale() {
 								updateDisplay(message);
 								
 								locale[6][3].canVisit = true;
-								locale[5][3].desc = "You stand in an empty room. The ghost cat that was here is gone now and hasn't come back yet. Better hurry."
+								locale[5][3].desc = "You stand in an empty room. The ghost cat that was here is gone now and hasn't come back yet. Better hurry.";
 							}
 							
 							// This part of the puzzle is a WIP
@@ -180,8 +180,7 @@ function initLocale() {
 		}
 	}
 	
-	// Replaces all the false "errorRoom" locations with the correct rooms
-	
+	// Replaces all the false null locations with the correct rooms
 	locale[1][2] = mirrorRoom;
 	
 	locale[2][1] = mattressRoom;
@@ -201,4 +200,7 @@ function initLocale() {
 	locale[5][3] = ghostCatRoom;
 	
 	locale[6][3] = altarRoom;
+	
+	//Sets the current room
+	currentLoc = locale[eastWest][northSouth];
 }
