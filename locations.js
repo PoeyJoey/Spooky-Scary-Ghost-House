@@ -9,6 +9,9 @@
 function Locale() {
 	this.name = "";
 	this.desc = "";
+	// used to save the location's description if it changes temporarily
+	this.descBackUp = "";
+	this.hasBackUp = false;
 	
 	this.seeItem = false;
 	this.item = null;
@@ -54,6 +57,7 @@ function initLocale() {
 	var mirrorRoom = new Locale();
 	mirrorRoom.name = "Mirror Room";
 	mirrorRoom.desc = "You stand in a room with a door to the east. There is a large mirror on the wall in front of you but it's too dirty to see any reflections. Broken shards of the mirror are on the ground in front of the mirror.";
+	mirrorRoom.descBackUp = mirrorRoom.desc;
 	// seeItem will be changed to true after attempting to take the motivational cat poster
 	mirrorRoom.seeItem = false;
 	// item is the mirror shard (item [0])
@@ -63,11 +67,13 @@ function initLocale() {
 	var mattressRoom = new Locale();
 	mattressRoom.name = "Mattress Room";
 	mattressRoom.desc = "You stand in a room with a door to the south. There are mattresses piled up against the walls that block the windows. You see something move out of the corner of your eye, but when you look, it's gone. Must be rats.";
+	mattressRoom.descBackUp = mattressRoom.desc;
 	
 	// (2,2)
 	var centerRoom = new Locale();
 	centerRoom.name = "Center Room";
 	centerRoom.desc = "You stand in a room with doors on all sides. There is a large chandelier hanging from the center of the room.";
+	centerRoom.descBackUp = centerRoom.desc;
 	centerRoom.seeItem = true;
 	// item is the map (item [2])
 	centerRoom.item = item[2];
@@ -76,6 +82,7 @@ function initLocale() {
 	var trainRoom = new Locale();
 	trainRoom.name = "Train Room";
 	trainRoom.desc = "You stand in a room with a door to the north. There is a train set on the ground but no trains can be seen.";
+	trainRoom.descBackUp = trainRoom.desc;
 	trainRoom.seeItem = true;
 	// item is the ball of yarn (item [1])
 	trainRoom.item = item[1];
@@ -84,6 +91,7 @@ function initLocale() {
 	var catHallwayRoom = new Locale();
 	catHallwayRoom.name = "Cat Hallway Room";
 	catHallwayRoom.desc = "You stand in a hallway connecting two rooms to the east and the west. There are motivational cat posters all along the walls.";
+	catHallwayRoom.descBackUp = catHallwayRoom.desc;
 	// seeItem will be changed to true after finding the ghost cat in the ghost cat room
 	catHallwayRoom.seeItem = false;
 	// item is the motivational cat poster (item[4])
@@ -92,19 +100,22 @@ function initLocale() {
 	// (4,1)
 	var secretRoom = new Locale();
 	secretRoom.name = "Secret Room";
-	secretRoom.desc = "You found the exit! Although the game isn't finished yet... You'll have to solve a puzzle to get here in the next version. (involves items)";
+	secretRoom.desc = "You step through the hole in the side of the building out into the open air. You're finally free! You look behind you and notice that the wall no longer has a giant hole in it. Looks like there's no going back. Now to figure out how to get home...\n\n   To be continued...";
+	secretRoom.descBackUp = secretRoom.desc;
 	// canVisit will be unlocked when the player picks up the picture book.
 	secretRoom.canVisit = false;
 	
 	// (4,2)
 	var catRoom = new Locale();
 	catRoom.name = "Cat Room";
-	catRoom.desc = "You stand in a room filled with cats crawling all over the walls. They're blocking the door to the south.";
+	catRoom.desc = "You stand in a room filled with cats crawling all over the walls. They appear to be trying to get through the door to the south but can't turn the door knob. You can't get anywhere near the door.";
+	catRoom.descBackUp = catRoom.desc;
 	
 	// (4,3)
 	var toyRoom = new Locale();
 	toyRoom.name = "Toy Room";
-	toyRoom.desc = "There are cat toys scattered around the room. You now see why so many cats were trying to get in here.";
+	toyRoom.desc = "There are cat toys scattered all over the room. You now see why so many cats were trying to get in here.";
+	toyRoom.descBackUp = toyRoom.desc;
 	// canVisit will be unlocked when the player picks up the ball of yarn.
 	toyRoom.canVisit = false;
 	
@@ -112,11 +123,13 @@ function initLocale() {
 	var ghostCatRoom = new Locale();
 	ghostCatRoom.name = "Ghost Cat Room";
 	ghostCatRoom.desc = "A giant sleeping ghost cat blocks the way to the next room. Nothing you do will make it move.";
+	ghostCatRoom.descBackUp = ghostCatRoom.desc;
 	
 	// (6,3)
 	var altarRoom = new Locale();
 	altarRoom.name = "Altar Room";
 	altarRoom.desc = "There is an altar towards the back of the room.  A riddle is inscribed into the wall behind the altar. It reads 'TODO - create an actual riddle.' How strange...";
+	altarRoom.descBackUp = altarRoom.desc;
 	altarRoom.seeItem = true;
 	// item is the picture book (item[3])
 	altarRoom.item = item[3];

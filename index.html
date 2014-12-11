@@ -102,32 +102,35 @@
 		</table>	
 		
 		
-		<input	type="text" 
-					id = "txtCommand"
-					name="txtCommand"
-					placeholder = "Type Command Here"
-					onkeydown = "if (event.keyCode == 13) commandInput(document.getElementById('txtCommand').value);"
-					style="width: 300px"
-					disabled />
-				
-		<input	type="button"
-					id = "btnGo"
-					value="Go" 
-					onclick="commandInput(document.getElementById('txtCommand').value);"
-					disabled />
-				
+		<input
+			type="text" 
+			id = "txtCommand"
+			name="txtCommand"
+			placeholder = "Type Command Here"
+			onkeydown = "if (event.keyCode == 13) commandInput(document.getElementById('txtCommand').value);"
+			style="width: 300px"
+			disabled />
+			
+		<input
+			type="button"
+			id = "btnGo"
+			value="Go" 
+			onclick="commandInput(document.getElementById('txtCommand').value);"
+			disabled />
+			
 		<br><br>
 		
 		Score:
-		<input	type="text"
-					id="scoreBox"
-					value="0"
-					style="width: 50px; text-align: center"
-					disabled>
-		
+		<input
+			type="text"
+			id="scoreBox"
+			value="0"
+			style="width: 50px; text-align: center"
+			disabled>
+			
 		<br><br><br>
 		
-		<img src="mapX.png" id="map" width="600" height="312" style="visibility: hidden;">
+		<img src="blankMap.png" id="map" width="600" height="312" style="visibility: hidden;">
 		
 		<br> <br> <br> <br> <br>
 		
