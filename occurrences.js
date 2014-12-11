@@ -102,6 +102,13 @@ function occurrences() {
 		// allow player to go to final room
 		locale[4][1].canVisit = true;
 		
+		// removes picture book from inventory
+		for (var i = 0; i < inventory.length; i++) {
+			if (inventory[i] === item[3].name) {
+				inventory.splice(i, 1);
+			}
+		}
+		
 		// change description back to what it was
 		locale[2][1].hasBackUp = true;
 	}
@@ -111,7 +118,7 @@ function occurrences() {
 	// and	player can visit secret room
 	// and	player is in center room
 	if (locale[2][1].canVisit && locale[4][1].canVisit && currentLoc === locale[2][2]) {
-		// change description of center room
+		// change description of center room temporarily
 		locale[2][2].desc = "As you leave the room full of mattresses, the door slams shut behind you and locks itself. Immediately after, you hear a loud explosion come from somewhere east of the room and a few cats come running out of the door. Something must have happened.";
 		
 		// change description and back up of cat room
@@ -123,6 +130,7 @@ function occurrences() {
 		
 		// change description of center room for next visit
 		locale[2][2].descBackUp = "You stand in a room with doors on all sides but the door to the north is locked."
+		locale[2][2].hasBackUp = true;
 	}
 	
 	// You Win!
