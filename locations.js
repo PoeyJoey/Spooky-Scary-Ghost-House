@@ -8,6 +8,7 @@
 //
 function Locale() {
 	this.name = "";
+	this.mapName = "";
 	this.desc = "";
 	// used to save the location's description if it changes temporarily
 	this.descBackUp = "";
@@ -27,6 +28,9 @@ function Locale() {
 						// runs the occurrences function
 						occurrences();
 						
+						// changes the map
+						this.updateMap();
+						
 						// updates the message based on the room
 						this.message();
 					}
@@ -36,6 +40,10 @@ function Locale() {
 								this.hasVisited = true;
 								score += 5;
 							}
+						}
+	
+	this.updateMap =	function() {
+							document.getElementById("map").src = this.mapName;
 						}
 	
 	this.message =	function() {
@@ -62,12 +70,14 @@ function initLocale() {
 	mirrorRoom.seeItem = false;
 	// item is the mirror shard (item [0])
 	mirrorRoom.item = item[0];
+	mirrorRoom.mapName = "mirrorRoom.png";
 	
 	// (2,1)
 	var mattressRoom = new Locale();
 	mattressRoom.name = "Mattress Room";
 	mattressRoom.desc = "You stand in a room with a door to the south. There are mattresses piled up against the walls that block the windows. You see something move out of the corner of your eye, but when you look, it's gone. Must be rats.";
 	mattressRoom.descBackUp = mattressRoom.desc;
+	mattressRoom.mapName = "mattressRoom.png";
 	
 	// (2,2)
 	var centerRoom = new Locale();
@@ -77,6 +87,7 @@ function initLocale() {
 	centerRoom.seeItem = true;
 	// item is the map (item [2])
 	centerRoom.item = item[2];
+	centerRoom.mapName = "centerRoom.png";
 	
 	// (2,3)
 	var trainRoom = new Locale();
@@ -86,6 +97,7 @@ function initLocale() {
 	trainRoom.seeItem = true;
 	// item is the ball of yarn (item [1])
 	trainRoom.item = item[1];
+	trainRoom.mapName = "trainRoom.png";
 	
 	// (3,2)
 	var catHallwayRoom = new Locale();
@@ -96,6 +108,7 @@ function initLocale() {
 	catHallwayRoom.seeItem = false;
 	// item is the motivational cat poster (item[4])
 	catHallwayRoom.item = item[4];
+	catHallwayRoom.mapName = "catHallwayRoom.png";
 	
 	// (4,1)
 	var secretRoom = new Locale();
@@ -104,12 +117,14 @@ function initLocale() {
 	secretRoom.descBackUp = secretRoom.desc;
 	// canVisit will be unlocked when the player picks up the picture book.
 	secretRoom.canVisit = false;
+	secretRoom.mapName = "secretRoom.png";
 	
 	// (4,2)
 	var catRoom = new Locale();
 	catRoom.name = "Cat Room";
 	catRoom.desc = "You stand in a room filled with cats crawling all over the walls. They appear to be trying to get through the door to the south but can't turn the door knob. You can't get anywhere near the door.";
 	catRoom.descBackUp = catRoom.desc;
+	catRoom.mapName = "catRoom.png";
 	
 	// (4,3)
 	var toyRoom = new Locale();
@@ -118,23 +133,26 @@ function initLocale() {
 	toyRoom.descBackUp = toyRoom.desc;
 	// canVisit will be unlocked when the player picks up the ball of yarn.
 	toyRoom.canVisit = false;
+	toyRoom.mapName = "toyRoom.png";
 	
 	// (5,3)
 	var ghostCatRoom = new Locale();
 	ghostCatRoom.name = "Ghost Cat Room";
 	ghostCatRoom.desc = "A giant sleeping ghost cat blocks the way to the next room. Nothing you do will make it move.";
 	ghostCatRoom.descBackUp = ghostCatRoom.desc;
+	ghostCatRoom.mapName = "ghostCatRoom.png";
 	
 	// (6,3)
 	var altarRoom = new Locale();
 	altarRoom.name = "Altar Room";
-	altarRoom.desc = "There is an altar towards the back of the room.  A riddle is inscribed into the wall behind the altar. It reads 'TODO - create an actual riddle.' How strange...";
+	altarRoom.desc = "There is an altar towards the back of the room.  Something is inscribed into the wall behind the altar. It reads \"Books need sleep too you know.\" How strange...";
 	altarRoom.descBackUp = altarRoom.desc;
 	altarRoom.seeItem = true;
 	// item is the picture book (item[3])
 	altarRoom.item = item[3];
 	// canVisit will be unlocked when player picks up the motivational cat poster.
 	altarRoom.canVisit = false;
+	altarRoom.mapName = "altarRoom.png";
 	
 	
 	//
